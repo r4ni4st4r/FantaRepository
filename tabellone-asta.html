@@ -1,0 +1,780 @@
+<title>Tabellone Asta Fantacalcio</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600;700&display=swap">
+<style>
+:root{
+  --paper:#F4E9E6;
+  --card:#FCF6F4;
+  --card-2:#F7EDEA;
+  --ink:#1B1E2B;
+  --ink-soft:#6A6169;
+  --ink-faint:#988E94;
+  --line:#DFCCC7;
+  --line-soft:#EADCD8;
+  --azzurro:#0B5FA5;
+  --azzurro-br:#1A86D9;
+  --azzurro-wash:#E4EEF7;
+  --verde:#0F7A5A;
+  --verde-wash:#E2F0EA;
+  --ocra:#9A5411;
+  --ocra-wash:#F6E9DC;
+  --rosso:#A81F3C;
+  --rosso-wash:#F7E3E7;
+  --shadow:0 1px 2px rgba(27,30,43,.06),0 8px 24px -12px rgba(27,30,43,.18);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#171316;
+    --card:#221C20;
+    --card-2:#2A2227;
+    --ink:#F3E7E3;
+    --ink-soft:#B6A7AD;
+    --ink-faint:#8A7B82;
+    --line:#3B3036;
+    --line-soft:#312830;
+    --azzurro:#6FB4EC;
+    --azzurro-br:#8FC8F5;
+    --azzurro-wash:#1B2B3A;
+    --verde:#5FC79E;
+    --verde-wash:#16302A;
+    --ocra:#DFA05C;
+    --ocra-wash:#33251A;
+    --rosso:#EE8296;
+    --rosso-wash:#361A22;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#171316;
+  --card:#221C20;
+  --card-2:#2A2227;
+  --ink:#F3E7E3;
+  --ink-soft:#B6A7AD;
+  --ink-faint:#8A7B82;
+  --line:#3B3036;
+  --line-soft:#312830;
+  --azzurro:#6FB4EC;
+  --azzurro-br:#8FC8F5;
+  --azzurro-wash:#1B2B3A;
+  --verde:#5FC79E;
+  --verde-wash:#16302A;
+  --ocra:#DFA05C;
+  --ocra-wash:#33251A;
+  --rosso:#EE8296;
+  --rosso-wash:#361A22;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+}
+
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  font-size:15px;
+  line-height:1.45;
+  -webkit-font-smoothing:antialiased;
+}
+*{box-sizing:border-box}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.cond{font-family:"Archivo Narrow","IBM Plex Sans",sans-serif}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px 80px}
+
+/* ---------- console ---------- */
+.console{
+  position:sticky;top:0;z-index:20;
+  background:var(--paper);
+  border-bottom:1px solid var(--line);
+  margin:0 -16px;padding:14px 16px 12px;
+}
+.console-in{max-width:1180px;margin:0 auto}
+.masthead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.masthead h1{
+  font-family:"Archivo Narrow",sans-serif;font-weight:700;
+  font-size:23px;letter-spacing:-.01em;margin:0;text-wrap:balance;
+}
+.masthead .sub{color:var(--ink-faint);font-size:12.5px;letter-spacing:.02em}
+
+.dials{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:12px}
+.dial{
+  background:var(--card);border:1px solid var(--line-soft);border-radius:8px;
+  padding:9px 12px 10px;
+}
+.dial.lead{border-color:var(--azzurro);background:var(--azzurro-wash)}
+.dial .k{
+  font-size:10.5px;text-transform:uppercase;letter-spacing:.09em;
+  color:var(--ink-soft);font-weight:600;display:block;margin-bottom:1px;
+}
+.dial .v{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-weight:700;font-size:26px;line-height:1.1;letter-spacing:-.02em}
+.dial.lead .v{color:var(--azzurro)}
+.dial .u{font-size:12px;font-weight:500;color:var(--ink-soft);margin-left:3px}
+
+.slots{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:11px}
+.slot{
+  display:flex;align-items:center;gap:6px;
+  background:var(--card);border:1px solid var(--line-soft);
+  border-radius:999px;padding:3px 10px 3px 4px;font-size:12.5px;
+}
+.slot .rc{width:19px;height:19px;border-radius:50%;display:grid;place-items:center;font-size:10.5px;font-weight:700;font-family:"IBM Plex Mono",monospace}
+.slot .ct{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-weight:600}
+.slot .bd{color:var(--ink-faint);font-size:11.5px;font-family:"IBM Plex Mono",monospace}
+.slot.full{opacity:.5}
+
+.rc-P{background:var(--ocra-wash);color:var(--ocra)}
+.rc-D{background:var(--azzurro-wash);color:var(--azzurro)}
+.rc-C{background:var(--verde-wash);color:var(--verde)}
+.rc-A{background:var(--rosso-wash);color:var(--rosso)}
+
+.search-row{display:flex;gap:8px;align-items:stretch}
+#q{
+  flex:1;min-width:0;
+  font-family:"Archivo Narrow",sans-serif;font-size:19px;font-weight:600;
+  padding:9px 13px;border-radius:8px;
+  border:1.5px solid var(--line);background:var(--card);color:var(--ink);
+}
+#q::placeholder{color:var(--ink-faint);font-weight:500}
+#q:focus{outline:none;border-color:var(--azzurro);box-shadow:0 0 0 3px var(--azzurro-wash)}
+.btn{
+  font-family:"IBM Plex Sans",sans-serif;font-size:13px;font-weight:600;
+  padding:8px 12px;border-radius:8px;cursor:pointer;
+  border:1.5px solid var(--line);background:var(--card);color:var(--ink-soft);
+  white-space:nowrap;
+}
+.btn:hover{border-color:var(--ink-faint);color:var(--ink)}
+.btn:focus-visible{outline:2px solid var(--azzurro);outline-offset:2px}
+.btn.on{background:var(--azzurro);border-color:var(--azzurro);color:#fff}
+:root[data-theme="dark"] .btn.on,:root:not([data-theme="light"]) .btn.on{color:#12202C}
+
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.filters .btn{padding:5px 11px;font-size:12.5px}
+
+/* ---------- layout ---------- */
+.cols{display:grid;grid-template-columns:minmax(0,1fr) 296px;gap:22px;margin-top:20px;align-items:start}
+@media (max-width:880px){.cols{grid-template-columns:minmax(0,1fr)}}
+
+.tier-head{
+  display:flex;align-items:center;gap:9px;
+  margin:20px 0 7px;padding-bottom:5px;border-bottom:1.5px solid var(--ink);
+}
+.tier-head:first-child{margin-top:0}
+.tier-head .n{font-family:"Archivo Narrow",sans-serif;font-weight:700;font-size:16px;letter-spacing:.01em}
+.tier-head .d{font-size:12px;color:var(--ink-soft);flex:1}
+.tier-head .cnt{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-faint);font-weight:600}
+
+.rows{display:flex;flex-direction:column;gap:3px}
+.row{
+  display:grid;
+  grid-template-columns:24px minmax(0,1fr) auto auto;
+  gap:10px;align-items:center;
+  background:var(--card);border:1px solid var(--line-soft);
+  border-radius:7px;padding:7px 10px;
+}
+.row.gone{opacity:.36}
+.row.gone .nm{text-decoration:line-through}
+.row.mine{border-color:var(--verde);background:var(--verde-wash)}
+.row .rc{width:24px;height:24px;border-radius:6px;display:grid;place-items:center;font-size:11.5px;font-weight:700;font-family:"IBM Plex Mono",monospace}
+.who{min-width:0}
+.nm{font-family:"Archivo Narrow",sans-serif;font-weight:700;font-size:16.5px;line-height:1.2;letter-spacing:-.005em}
+.meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:1px}
+.team{font-size:11.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.tag{
+  font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  padding:1px 5px;border-radius:3px;white-space:nowrap;
+}
+.tag.pen{background:var(--verde-wash);color:var(--verde);border:1px solid var(--verde)}
+.tag.ti{background:transparent;color:var(--ink);border:1px solid var(--ink-faint)}
+.tag.def-good{background:var(--verde-wash);color:var(--verde);border:1px solid var(--verde)}
+.tag.def-ok{background:var(--azzurro-wash);color:var(--azzurro);border:1px solid var(--azzurro)}
+.tag.def-mid{background:var(--card-2);color:var(--ink-soft);border:1px solid var(--line)}
+.tag.def-bad{background:var(--rosso-wash);color:var(--rosso);border:1px solid var(--rosso)}
+.tag.warn{background:var(--ocra-wash);color:var(--ocra);border:1px solid var(--ocra)}
+.tag.avoid{background:var(--rosso-wash);color:var(--rosso);border:1px solid var(--rosso)}
+.note{font-size:11.5px;color:var(--ink-soft);line-height:1.35;margin-top:2px}
+.price{text-align:right;line-height:1}
+.price .pv{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-weight:700;font-size:20px;letter-spacing:-.02em}
+.price .pk{display:block;font-size:9.5px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink-faint);font-weight:600}
+.acts{display:flex;gap:4px}
+.mini{
+  border:1.5px solid var(--line);background:var(--card-2);color:var(--ink-soft);
+  border-radius:6px;width:30px;height:30px;cursor:pointer;
+  font-size:14px;font-weight:700;display:grid;place-items:center;padding:0;
+}
+.mini:hover{color:var(--ink);border-color:var(--ink-faint)}
+.mini:focus-visible{outline:2px solid var(--azzurro);outline-offset:1px}
+.mini.take{color:var(--verde);border-color:var(--verde)}
+.mini.take:hover{background:var(--verde);color:var(--card)}
+.mini.out:hover{background:var(--rosso);color:var(--card);border-color:var(--rosso)}
+.paid{font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:13px;color:var(--verde);white-space:nowrap}
+
+.empty{padding:26px 12px;text-align:center;color:var(--ink-faint);font-size:13.5px}
+
+/* ---------- sidebar ---------- */
+.side{position:sticky;top:224px;display:flex;flex-direction:column;gap:14px}
+@media (max-width:880px){.side{position:static;top:auto}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:9px;box-shadow:var(--shadow);overflow:hidden}
+.panel h2{
+  font-family:"Archivo Narrow",sans-serif;font-weight:700;font-size:13px;
+  text-transform:uppercase;letter-spacing:.08em;margin:0;
+  padding:9px 12px;border-bottom:1px solid var(--line-soft);color:var(--ink-soft);
+  display:flex;justify-content:space-between;gap:8px;
+}
+.panel h2 .c{font-family:"IBM Plex Mono",monospace;color:var(--ink-faint)}
+.roster{display:flex;flex-direction:column}
+.rg{padding:6px 12px;border-bottom:1px solid var(--line-soft)}
+.rg:last-child{border-bottom:0}
+.rg-h{display:flex;justify-content:space-between;align-items:baseline;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--ink-faint);margin-bottom:3px}
+.rg-h .sp{font-family:"IBM Plex Mono",monospace;font-weight:600}
+.ri{display:flex;justify-content:space-between;gap:8px;align-items:baseline;padding:2px 0;font-size:13px}
+.ri .rn{font-family:"Archivo Narrow",sans-serif;font-weight:600;font-size:14.5px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ri .rp{font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:12.5px;color:var(--ink-soft);flex-shrink:0}
+.ri .rx{border:0;background:none;color:var(--ink-faint);cursor:pointer;font-size:13px;padding:0 0 0 4px;line-height:1}
+.ri .rx:hover{color:var(--rosso)}
+.rg .none{font-size:12px;color:var(--ink-faint);font-style:italic;padding:1px 0}
+
+.rules{padding:0 12px 11px}
+.rules ol{margin:8px 0 0;padding-left:19px;display:flex;flex-direction:column;gap:6px}
+.rules li{font-size:12.5px;line-height:1.4;color:var(--ink-soft)}
+.rules li b{color:var(--ink);font-weight:600}
+.bar{height:5px;background:var(--line-soft);border-radius:3px;overflow:hidden;margin:0 12px 11px}
+.bar i{display:block;height:100%;background:var(--azzurro);border-radius:3px;transition:width .18s ease}
+.foot{margin-top:26px;padding-top:14px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink-faint);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.foot button{border:0;background:none;color:var(--ink-faint);text-decoration:underline;cursor:pointer;font-size:11.5px;font-family:inherit}
+.foot button:hover{color:var(--rosso)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="console">
+  <div class="console-in">
+    <div class="masthead">
+      <h1>Tabellone d'asta</h1>
+      <span class="sub">10 squadre &middot; 500 crediti &middot; rosa 25 &middot; <b>modificatore di difesa attivo</b></span>
+    </div>
+    <div class="dials">
+      <div class="dial lead"><span class="k">Crediti rimasti</span><span class="v" id="d-left">500</span></div>
+      <div class="dial"><span class="k">Slot da riempire</span><span class="v" id="d-slots">25</span></div>
+      <div class="dial"><span class="k">Offerta max possibile</span><span class="v" id="d-max">476</span></div>
+    </div>
+    <div class="slots" id="slots"></div>
+    <div class="search-row">
+      <input id="q" type="search" placeholder="Cerca un giocatore&hellip;" autocomplete="off" spellcheck="false" aria-label="Cerca un giocatore">
+      <button class="btn" id="f-tit" aria-pressed="false" title="Solo giocatori visti titolari nelle prime giornate">Solo titolari</button>
+      <button class="btn" id="f-blocco" aria-pressed="false" title="Solo portieri e difensori di squadre che prendono pochi gol">Blocco difesa</button>
+      <button class="btn" id="f-pen" aria-pressed="false">Rigoristi</button>
+      <button class="btn on" id="f-hide" aria-pressed="true">Nascondi presi</button>
+    </div>
+    <div class="filters" id="rolebar"></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="cols">
+    <main id="list"></main>
+    <aside class="side">
+      <section class="panel">
+        <h2>La mia rosa <span class="c" id="r-count">0/25</span></h2>
+        <div class="bar"><i id="r-bar" style="width:0%"></i></div>
+        <div class="roster" id="roster"></div>
+      </section>
+      <section class="panel">
+        <h2>Non dimenticare</h2>
+        <div class="rules">
+          <ol>
+            <li><b>Compra il blocco:</b> portiere + 3 difensori della stessa difesa solida. Il modificatore vale fino a +6, cioè due gol.</li>
+            <li><b>In difesa contano i VOTI</b>, non i gol: guarda i gol subiti, non chi segna.</li>
+            <li><b>Non superare il MAX.</b> È un tetto, non un consiglio.</li>
+            <li><b>Rilancia di 1 credito</b> alla volta, mai a salti.</li>
+            <li><b>Solo titolari.</b> Un panchinaro dell'Inter vale meno di un titolare del Venezia.</li>
+            <li><b>Almeno 3 rigoristi</b> in rosa: sono bonus quasi garantiti.</li>
+            <li><b>Non aprire tu</b> le aste sui big nei primi minuti: si pagano sempre troppo.</li>
+          </ol>
+        </div>
+      </section>
+    </aside>
+  </div>
+  <div class="foot">
+    <span>Prezzi tarati su 10 squadre e 500 crediti. Dati aggiornati al 9 settembre 2026 (mercato chiuso, 3 giornate giocate).</span>
+    <button id="reset">Azzera tutto</button>
+  </div>
+</div>
+
+<script>
+var BUDGET = 500;
+var SLOTS = {P:3, D:8, C:8, A:6};
+var TARGET = {P:40, D:115, C:130, A:210};
+var ROLE_NAME = {P:"Portieri", D:"Difensori", C:"Centrocampisti", A:"Attaccanti"};
+var TIER_NAME = {
+  1:["Fascia 1", "obiettivi principali"],
+  2:["Fascia 2", "piano B, titolari solidi"],
+  3:["Fascia 3", "titolari low cost: qui si chiude la rosa"],
+  4:["Riserve da 1 credito", "solo per completare"]
+};
+// gol subiti dopo 3 giornate: la base del modificatore di difesa
+var GC = {
+  "Roma":1, "Lazio":1, "Cagliari":1, "Juventus":1, "Milan":2,
+  "Inter":3, "Como":3, "Atalanta":3, "Frosinone":3,
+  "Bologna":4, "Parma":4,
+  "Napoli":5, "Torino":5, "Sassuolo":5, "Udinese":5, "Lecce":5,
+  "Venezia":7, "Genoa":7, "Monza":8, "Fiorentina":9
+};
+
+// n=nome, t=squadra, r=ruolo, x=prezzo massimo, f=fascia,
+// p=rigorista, w=attenzione, a=da evitare, s=nota
+var P = [
+  // ---------- PORTIERI ----------
+  {n:"Svilar", t:"Roma", r:"P", x:40, f:1, s:"Il migliore del campionato e la difesa piu solida. Con il modificatore attivo vale ogni credito.", ti:1},
+  {n:"Maignan", t:"Milan", r:"P", x:32, f:1, s:"Top assoluto, difesa da 2 gol subiti.", ti:1},
+  {n:"Vicario", t:"Juventus", r:"P", x:28, f:1, s:"Sottovalutato: la Juve ha subito 1 gol. Ottimo rapporto qualita/prezzo.", ti:1},
+  {n:"Carnesecchi", t:"Atalanta", r:"P", x:26, f:1, s:"Molto affidabile.", ti:1},
+  {n:"J. Martinez", t:"Inter", r:"P", x:24, f:1, ti:1},
+  {n:"Butez", t:"Como", r:"P", x:18, f:2, w:"Rotazioni", ti:1},
+  {n:"Meret", t:"Napoli", r:"P", x:16, f:2, w:"Difesa fragile", s:"Il Napoli ha gia subito 5 gol: non e piu l'affare che sembrava.", ti:1},
+  {n:"Mandas", t:"Lazio", r:"P", x:14, f:2, s:"LA SCELTA FURBA: un solo gol subito, costa un terzo di Svilar.", ti:1},
+  {n:"Caprile", t:"Cagliari", r:"P", x:10, f:2, s:"1 gol subito. Scommessa a prezzo minimo.", ti:1},
+  {n:"De Gea", t:"Fiorentina", r:"P", x:10, f:2, a:"Difesa peggiore", s:"Para tantissimo, ma la Fiorentina ha subito 9 gol: con il modificatore attivo ti affossa la media.", ti:1},
+  {n:"Okoye", t:"Udinese", r:"P", x:8, f:3, ti:1},
+  {n:"Falcone", t:"Lecce", r:"P", x:8, f:3, ti:1},
+  {n:"Skorupski", t:"Bologna", r:"P", x:7, f:3, ti:1},
+  {n:"Perri", t:"Torino", r:"P", x:6, f:3, ti:1},
+  {n:"Gollini", t:"Roma", r:"P", x:1, f:4},
+  {n:"Corvi", t:"Parma", r:"P", x:1, f:4, ti:1},
+  {n:"Stankovic", t:"Venezia", r:"P", x:1, f:4, ti:1},
+  {n:"Palmisani", t:"Frosinone", r:"P", x:1, f:4, ti:1},
+  {n:"Thiam", t:"Monza", r:"P", x:1, f:4},
+
+  // ---------- DIFENSORI ----------
+  {n:"Dimarco", t:"Inter", r:"D", x:35, f:1, w:"Verifica ruolo", s:"Il piu forte in assoluto: voti alti E bonus. In alcuni listoni e classificato centrocampista, controlla nell'app prima di offrire.", ti:1},
+  {n:"Bremer", t:"Juventus", r:"D", x:28, f:1, s:"Media voto 6,81: la migliore del reparto. Il difensore piu caro del listone.", ti:1},
+  {n:"Wesley", t:"Roma", r:"D", x:28, f:1, s:"L'unico che unisce voti alti e bonus: esterno offensivo della difesa migliore.", ti:1},
+  {n:"Bastoni", t:"Inter", r:"D", x:26, f:1, s:"Il profilo piu affidabile in assoluto.", ti:1},
+  {n:"Mancini", t:"Roma", r:"D", x:24, f:1, s:"Cuore della difesa migliore del campionato. Prendilo con Ndicka.", ti:1},
+  {n:"Ndicka", t:"Roma", r:"D", x:22, f:1, s:"Compralo insieme a Mancini: sono il blocco Roma.", ti:1},
+  {n:"Pavlovic", t:"Milan", r:"D", x:20, f:1, s:"Media 6,62: una macchina da modificatore.", ti:1},
+  {n:"Akanji", t:"Inter", r:"D", x:20, f:1, s:"Solido e duttile, media 6,41.", ti:1},
+  {n:"Di Lorenzo", t:"Napoli", r:"D", x:20, f:1, s:"Unisce modificatore e bonus, ma la difesa del Napoli e meno solida quest'anno.", ti:1},
+  {n:"Rrahmani", t:"Napoli", r:"D", x:18, f:1, s:"Sottovalutato, media 6,48.", ti:1},
+  {n:"Yan Couto", t:"Como", r:"D", x:16, f:2, s:"Terzino molto offensivo.", ti:1},
+  {n:"Solet", t:"Udinese", r:"D", x:16, f:2, s:"Leader della difesa.", ti:1},
+  {n:"Gila", t:"Milan", r:"D", x:16, f:2, s:"Innesto perfetto, molto solido.", ti:1},
+  {n:"Molina", t:"Roma", r:"D", x:15, f:2, s:"Completa il blocco Roma.", ti:1},
+  {n:"Bisseck", t:"Inter", r:"D", x:15, f:2, ti:1},
+  {n:"Stones", t:"Inter", r:"D", x:15, f:2, ti:1},
+  {n:"Scalvini", t:"Atalanta", r:"D", x:15, f:2, ti:1},
+  {n:"Kalulu", t:"Juventus", r:"D", x:14, f:2, s:"Completa il blocco Juve.", ti:1},
+  {n:"Hermoso", t:"Roma", r:"D", x:13, f:2, s:"Il terzo della difesa Roma, e costa poco: la chiave del blocco premium.", ti:1},
+  {n:"Tiago Gabriel", t:"Lecce", r:"D", x:13, f:2, s:"36 presenze attese: affidabilita pura.", ti:1},
+  {n:"Comuzzo", t:"Torino", r:"D", x:12, f:2, s:"Miglior rapporto qualita/prezzo del listone.", ti:1},
+  {n:"Miranda", t:"Bologna", r:"D", x:12, f:2, ti:1},
+  {n:"Lucumi", t:"Juventus", r:"D", x:12, f:2, s:"Completa il blocco Juve.", ti:1},
+  {n:"Mina", t:"Cagliari", r:"D", x:12, f:2, p:1, s:"Difensore E rigorista, in una difesa da 1 gol subito: combinazione rarissima."},
+  {n:"Spinazzola", t:"Napoli", r:"D", x:12, f:2, ti:1},
+  {n:"Zappacosta", t:"Atalanta", r:"D", x:11, f:2, ti:1},
+  {n:"Bellanova", t:"Atalanta", r:"D", x:11, f:2},
+  {n:"Celik", t:"Juventus", r:"D", x:10, f:2, ti:1},
+  {n:"Kossounou", t:"Atalanta", r:"D", x:10, f:2, ti:1},
+  {n:"Kristensen", t:"Atalanta", r:"D", x:10, f:2},
+  {n:"Chalobah", t:"Como", r:"D", x:10, f:2, ti:1},
+  {n:"De Winter", t:"Milan", r:"D", x:10, f:2, ti:1},
+  {n:"Doekhi", t:"Lazio", r:"D", x:9, f:3, s:"BLOCCO LAZIO: 1 gol subito come la Roma, a un quinto del prezzo. Segna anche di testa.", ti:1},
+  {n:"Marusic", t:"Lazio", r:"D", x:9, f:3, s:"BLOCCO LAZIO."},
+  {n:"Nuno Tavares", t:"Lazio", r:"D", x:8, f:3, s:"BLOCCO LAZIO, terzino offensivo.", ti:1},
+  {n:"Provstgaard", t:"Lazio", r:"D", x:7, f:3, s:"BLOCCO LAZIO a prezzo minimo.", ti:1},
+  {n:"Heggem", t:"Bologna", r:"D", x:8, f:3, ti:1},
+  {n:"Valle", t:"Como", r:"D", x:8, f:3, s:"Terzino offensivo.", ti:1},
+  {n:"Ramon", t:"Como", r:"D", x:7, f:3, ti:1},
+  {n:"Ze Pedro", t:"Cagliari", r:"D", x:6, f:3, s:"BLOCCO CAGLIARI: 1 gol subito a 6 crediti.", ti:1},
+  {n:"Obert", t:"Cagliari", r:"D", x:6, f:3, s:"BLOCCO CAGLIARI.", ti:1},
+  {n:"Rodriguez", t:"Cagliari", r:"D", x:6, f:3, s:"BLOCCO CAGLIARI.", ti:1},
+  {n:"Diego Carlos", t:"Parma", r:"D", x:6, f:3, ti:1},
+  {n:"Valeri", t:"Parma", r:"D", x:6, f:3, ti:1},
+  {n:"Delprato", t:"Parma", r:"D", x:6, f:3, ti:1},
+  {n:"Vojvoda", t:"Udinese", r:"D", x:6, f:3, ti:1},
+  {n:"Dragusin", t:"Fiorentina", r:"D", x:6, f:3, w:"Difesa peggiore", ti:1},
+  {n:"Jimenez", t:"Fiorentina", r:"D", x:6, f:3, w:"Difesa peggiore", ti:1},
+  {n:"Gaspar", t:"Lecce", r:"D", x:5, f:3, ti:1},
+  {n:"Veiga", t:"Lecce", r:"D", x:5, f:3, ti:1},
+  {n:"Gallo", t:"Lecce", r:"D", x:5, f:3, ti:1},
+  {n:"Idzes", t:"Sassuolo", r:"D", x:5, f:3, ti:1},
+  {n:"Cinquegrano", t:"Sassuolo", r:"D", x:4, f:3, ti:1},
+  {n:"Bracaglia", t:"Frosinone", r:"D", x:4, f:3, s:"Difesa neopromossa sorprendente: solo 3 gol subiti.", ti:1},
+  {n:"Monterisi", t:"Frosinone", r:"D", x:4, f:3, ti:1},
+  {n:"Marcandalli", t:"Genoa", r:"D", x:4, f:3, w:"Difesa fragile", ti:1},
+  {n:"Vasquez", t:"Genoa", r:"D", x:4, f:3, w:"Difesa fragile", ti:1},
+  {n:"Calvani", t:"Frosinone", r:"D", x:3, f:3, ti:1},
+  {n:"Schingtienne", t:"Venezia", r:"D", x:3, f:3, w:"Difesa fragile", ti:1},
+  {n:"Ziolkowski", t:"Monza", r:"D", x:2, f:3, s:"28 presenze attese a 1-2 crediti: il miglior affare del listone per chiudere la rosa."},
+
+  // ---------- CENTROCAMPISTI ----------
+  {n:"Calhanoglu", t:"Inter", r:"C", x:58, f:1, p:1, s:"PRIMA SCELTA a centrocampo. Rigorista dell'Inter: rigori, punizioni e assist.", ti:1},
+  {n:"Nico Paz", t:"Como", r:"C", x:55, f:1, s:"Talento enorme, il Como gioca benissimo.", ti:1},
+  {n:"Pulisic", t:"Milan", r:"C", x:48, f:1, p:1, w:"Condizione", s:"Rigorista del Milan. Reduce da problemi fisici: verifica che sia in campo."},
+  {n:"Rabiot", t:"Milan", r:"C", x:40, f:1, ti:1},
+  {n:"Barella", t:"Inter", r:"C", x:36, f:1, s:"Sempre in campo, voti alti.", ti:1},
+  {n:"McTominay", t:"Napoli", r:"C", x:36, f:1, w:"Rientra a ottobre", s:"OCCASIONE: fuori per un'operazione, rientra a inizio ottobre. Vale 60+. Perdi 3-4 giornate su 38."},
+  {n:"Orsolini", t:"Bologna", r:"C", x:36, f:1, p:1, w:"Infortunato", s:"OCCASIONE: rigorista del Bologna, ora infortunato. Stessa logica di McTominay."},
+  {n:"De Bruyne", t:"Napoli", r:"C", x:32, f:2, p:1, s:"Rigorista del Napoli, assist a raffica. Occhio a eta e rotazioni."},
+  {n:"Frattesi", t:"Lazio", r:"C", x:28, f:2, s:"Gia 3 gol in 3 giornate, titolare inamovibile.", ti:1},
+  {n:"Zaccagni", t:"Lazio", r:"C", x:28, f:2, p:1, ti:1},
+  {n:"Baturina", t:"Como", r:"C", x:26, f:2, s:"Gia 2 gol, in grande forma.", ti:1},
+  {n:"Vlasic", t:"Torino", r:"C", x:24, f:2, p:1, s:"Rigorista fisso del Torino: tanti bonus a prezzo contenuto.", ti:1},
+  {n:"Atta", t:"Fiorentina", r:"C", x:22, f:2, ti:1},
+  {n:"Mastantuono", t:"Fiorentina", r:"C", x:22, f:2, ti:1},
+  {n:"Da Cunha", t:"Como", r:"C", x:20, f:2, p:1, ti:1},
+  {n:"Ederson", t:"Atalanta", r:"C", x:20, f:2, ti:1},
+  {n:"Samardzic", t:"Atalanta", r:"C", x:18, f:2, s:"Calci piazzati.", ti:1},
+  {n:"Politano", t:"Napoli", r:"C", x:18, f:2, s:"Assist.", ti:1},
+  {n:"Isaksen", t:"Lazio", r:"C", x:16, f:2, ti:1},
+  {n:"Zielinski", t:"Inter", r:"C", x:16, f:2, s:"Rigorista alternativo dell'Inter.", ti:1},
+  {n:"McKennie", t:"Juventus", r:"C", x:16, f:2, s:"Segna spesso."},
+  {n:"Kone", t:"Roma", r:"C", x:16, f:2, ti:1},
+  {n:"Modric", t:"Milan", r:"C", x:15, f:2, s:"Voti alti garantiti.", ti:1},
+  {n:"Bernabe", t:"Parma", r:"C", x:14, f:2, p:1},
+  {n:"Mandragora", t:"Torino", r:"C", x:13, f:2, s:"Calci piazzati.", ti:1},
+  {n:"Bernardeschi", t:"Bologna", r:"C", x:13, f:2, s:"Rigorista alternativo del Bologna.", ti:1},
+  {n:"Diao", t:"Como", r:"C", x:11, f:3, s:"Gia 2 gol, titolare.", ti:1},
+  {n:"Calo", t:"Frosinone", r:"C", x:10, f:3, p:1, s:"Un rigorista a 10 crediti: affare puro.", ti:1},
+  {n:"Busio", t:"Venezia", r:"C", x:10, f:3, p:1, ti:1},
+  {n:"Pedro Goncalves", t:"Fiorentina", r:"C", x:10, f:3, ti:1},
+  {n:"Saelemaekers", t:"Milan", r:"C", x:9, f:3},
+  {n:"Pessina", t:"Monza", r:"C", x:8, f:3, p:1, w:"Infortunato", s:"Rigorista del Monza, ma parte in infermeria."},
+  {n:"Fagioli", t:"Juventus", r:"C", x:8, f:3},
+  {n:"Ekkelenkamp", t:"Udinese", r:"C", x:8, f:3, s:"Titolare, segna.", ti:1},
+  {n:"Baldanzi", t:"Genoa", r:"C", x:8, f:3, ti:1},
+  {n:"Chukwueze", t:"Milan", r:"C", x:8, f:3, ti:1},
+  {n:"Elmas", t:"Napoli", r:"C", x:8, f:3},
+  {n:"Fazzini", t:"Cagliari", r:"C", x:7, f:3, s:"Titolare tecnico.", ti:1},
+  {n:"Zaniolo", t:"Udinese", r:"C", x:7, f:3, w:"Infortunato"},
+  {n:"Kamara", t:"Udinese", r:"C", x:7, f:3, s:"Gia 2 gol.", ti:1},
+  {n:"Adzic", t:"Sassuolo", r:"C", x:6, f:3, ti:1},
+  {n:"Schmid", t:"Frosinone", r:"C", x:6, f:3, ti:1},
+  {n:"Milla", t:"Como", r:"C", x:5, f:3},
+  {n:"Ndour", t:"Fiorentina", r:"C", x:5, f:3, ti:1},
+  {n:"Cacciamani", t:"Torino", r:"C", x:4, f:3, ti:1},
+  {n:"Keita", t:"Parma", r:"C", x:4, f:3, ti:1},
+  {n:"Ilic", t:"Lecce", r:"C", x:4, f:3, ti:1},
+  {n:"Frendrup", t:"Genoa", r:"C", x:4, f:3, ti:1},
+  {n:"Karlstrom", t:"Udinese", r:"C", x:3, f:3, ti:1},
+
+  // ---------- ATTACCANTI ----------
+  {n:"Malen", t:"Roma", r:"A", x:105, f:1, p:1, s:"PRIMA SCELTA ASSOLUTA. Rigorista della Roma, 5 gol in 3 giornate, capocannoniere. Preparati a una guerra.", ti:1},
+  {n:"Lautaro Martinez", t:"Inter", r:"A", x:98, f:1, s:"Capocannoniere 2025/26 con 17 gol. Sicurezza assoluta.", ti:1},
+  {n:"Hojlund", t:"Napoli", r:"A", x:90, f:1, p:1, s:"Gia 2 gol, rigorista alternativo del Napoli, titolare fisso.", ti:1},
+  {n:"Goncalo Ramos", t:"Milan", r:"A", x:85, f:1, p:1, s:"Centravanti titolare, rigorista alternativo.", ti:1},
+  {n:"Kolo Muani", t:"Juventus", r:"A", x:82, f:1, p:1, s:"Rigorista della Juve: con Yildiz infortunato tira lui.", ti:1},
+  {n:"Thuram", t:"Inter", r:"A", x:62, f:1, w:"Rischio", s:"Fortissimo, ma problemi fisici e ballottaggio con Pio Esposito. Non pagarlo da top."},
+  {n:"Dybala", t:"Roma", r:"A", x:52, f:2, s:"Qualita pura, se sta bene.", ti:1},
+  {n:"Scamacca", t:"Atalanta", r:"A", x:52, f:2, p:1, ti:1},
+  {n:"Douvikas", t:"Como", r:"A", x:48, f:2, s:"Gia 2 gol, titolare del Como.", ti:1},
+  {n:"Dovbyk", t:"Bologna", r:"A", x:45, f:2, s:"IL MIGLIORE QUI: ottimo rapporto qualita/prezzo, rilancio dopo la Roma."},
+  {n:"Kean", t:"Como", r:"A", x:45, f:2, w:"Titolarita", s:"Arrivato il 1 settembre: ballottaggio con Douvikas. Grande talento, posto non garantito."},
+  {n:"Davis", t:"Udinese", r:"A", x:40, f:2, p:1, s:"Rigorista dell'Udinese, titolare fisso.", ti:1},
+  {n:"P. Esposito", t:"Inter", r:"A", x:40, f:2, s:"Gioca titolare al posto di Thuram.", ti:1},
+  {n:"Berardi", t:"Sassuolo", r:"A", x:35, f:2, p:1, s:"Rigorista del Sassuolo: bonus quasi garantiti a prezzo medio.", ti:1},
+  {n:"Simeone", t:"Torino", r:"A", x:35, f:2, ti:1},
+  {n:"Woltemade", t:"Juventus", r:"A", x:35, f:2},
+  {n:"De Ketelaere", t:"Atalanta", r:"A", x:35, f:2, ti:1},
+  {n:"Beto", t:"Fiorentina", r:"A", x:30, f:2, p:1, ti:1},
+  {n:"Pinamonti", t:"Lazio", r:"A", x:28, f:2, ti:1},
+  {n:"Colombo", t:"Genoa", r:"A", x:26, f:2, p:1, s:"Un rigorista titolare a 26 crediti: ottimo.", ti:1},
+  {n:"Krstovic", t:"Atalanta", r:"A", x:24, f:2},
+  {n:"Yildiz", t:"Juventus", r:"A", x:22, f:2, a:"Fuori a novembre", s:"TRAPPOLA: operato al piede, rientra non prima di fine novembre."},
+  {n:"Raimondo", t:"Frosinone", r:"A", x:20, f:3, s:"4 gol in 3 giornate! La sorpresa del campionato, titolare della neopromossa.", ti:1},
+  {n:"Piccoli", t:"Bologna", r:"A", x:18, f:3, ti:1},
+  {n:"Vitinha", t:"Genoa", r:"A", x:16, f:3},
+  {n:"Stulic", t:"Lecce", r:"A", x:14, f:3, p:1, ti:1},
+  {n:"Maldini", t:"Cagliari", r:"A", x:14, f:3, ti:1},
+  {n:"Lauriente", t:"Sassuolo", r:"A", x:14, f:3, s:"Titolare, fa bonus.", ti:1},
+  {n:"Pellegrino", t:"Fiorentina", r:"A", x:11, f:3, ti:1},
+  {n:"Cutrone", t:"Monza", r:"A", x:11, f:3, ti:1},
+  {n:"Varela", t:"Monza", r:"A", x:10, f:3, s:"Gia 2 gol."},
+  {n:"Mendy", t:"Cagliari", r:"A", x:9, f:3, ti:1},
+  {n:"Yeboah", t:"Venezia", r:"A", x:9, f:3, ti:1},
+  {n:"A. Adams", t:"Venezia", r:"A", x:9, f:3, ti:1},
+  {n:"Camarda", t:"Milan", r:"A", x:8, f:3},
+  {n:"Toure", t:"Parma", r:"A", x:7, f:3, ti:1},
+  {n:"Ghedjemis", t:"Frosinone", r:"A", x:6, f:3},
+  {n:"Zapata", t:"Torino", r:"A", x:5, f:3},
+  {n:"Nzola", t:"Cagliari", r:"A", x:5, f:3},
+  {n:"Bijlow", t:"Genoa", r:"P", x:6, f:3, ti:1},
+  {n:"Sabelli", t:"Genoa", r:"D", x:4, f:3, ti:1},
+  {n:"Sow", t:"Genoa", r:"C", x:5, f:3, ti:1},
+  {n:"Ellertsson", t:"Genoa", r:"C", x:5, f:3, ti:1},
+  {n:"Osmajic", t:"Genoa", r:"A", x:8, f:3, ti:1},
+  {n:"Perrone", t:"Como", r:"C", x:6, f:3, ti:1},
+  {n:"Joao Mario", t:"Fiorentina", r:"D", x:5, f:3, ti:1},
+  {n:"Ranieri", t:"Fiorentina", r:"D", x:6, f:3, ti:1},
+  {n:"Valdepenas", t:"Fiorentina", r:"D", x:4, f:3, ti:1},
+  {n:"Dodo", t:"Fiorentina", r:"D", x:8, f:3, ti:1, s:"Terzino offensivo, in ballottaggio"},
+  {n:"Njie", t:"Fiorentina", r:"A", x:7, f:3, ti:1},
+  {n:"Coco", t:"Torino", r:"D", x:6, f:3, ti:1},
+  {n:"Comert", t:"Torino", r:"D", x:5, f:3, ti:1},
+  {n:"Fortini", t:"Torino", r:"D", x:5, f:3, ti:1},
+  {n:"Ismajli", t:"Torino", r:"D", x:5, f:3, ti:1},
+  {n:"Belghali", t:"Torino", r:"D", x:6, f:3, ti:1, s:"Esterno, qualche bonus"},
+  {n:"Fitz-Jim", t:"Torino", r:"C", x:4, f:3, ti:1},
+  {n:"Gineitis", t:"Torino", r:"C", x:4, f:3, ti:1},
+  {n:"Che Adams", t:"Torino", r:"A", x:12, f:3, ti:1, s:"Gia 2 gol. Da non confondere con A. Adams del Venezia"},
+  {n:"Pavard", t:"Inter", r:"D", x:12, f:2, ti:1},
+  {n:"Diouf", t:"Inter", r:"C", x:10, f:3, ti:1},
+  {n:"Rafa Marin", t:"Napoli", r:"D", x:8, f:3, ti:1},
+  {n:"Anguissa", t:"Napoli", r:"C", x:14, f:2, ti:1},
+  {n:"Lobotka", t:"Napoli", r:"C", x:10, f:3, ti:1},
+  {n:"Vergara", t:"Napoli", r:"C", x:5, f:3, ti:1},
+  {n:"Alisson Santos", t:"Napoli", r:"A", x:20, f:3, ti:1, s:"Titolare nel tridente"},
+  {n:"Cristante", t:"Roma", r:"C", x:10, f:3, ti:1},
+  {n:"Rodrigo Mora", t:"Roma", r:"C", x:10, f:3, ti:1},
+  {n:"Soule", t:"Roma", r:"A", x:26, f:2, ti:1, s:"Gia 2 gol. Verifica il ruolo: in alcuni listoni e centrocampista"},
+  {n:"Lulli", t:"Roma", r:"D", x:5, f:3, ti:1},
+  {n:"Bernasconi", t:"Atalanta", r:"D", x:6, f:3, ti:1},
+  {n:"Pasalic", t:"Atalanta", r:"C", x:10, f:3, ti:1},
+  {n:"Gaetano", t:"Atalanta", r:"C", x:8, f:3, ti:1},
+  {n:"Raspadori", t:"Atalanta", r:"A", x:20, f:3, ti:1},
+  {n:"Troilo", t:"Parma", r:"D", x:5, f:3, ti:1},
+  {n:"Britschgi", t:"Parma", r:"D", x:4, f:3, ti:1},
+  {n:"Fabbian", t:"Parma", r:"C", x:7, f:3, ti:1},
+  {n:"Ordonez", t:"Parma", r:"C", x:4, f:3, ti:1},
+  {n:"Romero", t:"Parma", r:"A", x:6, f:3, ti:1},
+  {n:"Tornqvist", t:"Monza", r:"P", x:1, f:4, ti:1},
+  {n:"Kouadio", t:"Monza", r:"D", x:3, f:3, ti:1},
+  {n:"Lucchesi", t:"Monza", r:"D", x:3, f:3, ti:1},
+  {n:"Carboni", t:"Monza", r:"D", x:3, f:3, ti:1},
+  {n:"Birindelli", t:"Monza", r:"D", x:3, f:3, ti:1},
+  {n:"Mangas", t:"Monza", r:"D", x:3, f:3, ti:1},
+  {n:"Akinsanmiro", t:"Monza", r:"C", x:4, f:3, ti:1},
+  {n:"Folorunsho", t:"Monza", r:"C", x:5, f:3, ti:1},
+  {n:"Colpani", t:"Monza", r:"C", x:8, f:3, ti:1},
+  {n:"Dany Mota", t:"Monza", r:"A", x:8, f:3, ti:1},
+  {n:"Oyono", t:"Frosinone", r:"D", x:3, f:3, ti:1},
+  {n:"Cichella", t:"Frosinone", r:"C", x:3, f:3, ti:1},
+  {n:"Fini", t:"Frosinone", r:"C", x:5, f:3, ti:1},
+  {n:"Kvernadze", t:"Frosinone", r:"A", x:7, f:3, ti:1},
+  {n:"Bella-Kotchap", t:"Venezia", r:"D", x:3, f:3, ti:1},
+  {n:"Halhal", t:"Venezia", r:"D", x:3, f:3, ti:1},
+  {n:"Mazzocchi", t:"Venezia", r:"D", x:4, f:3, ti:1},
+  {n:"Haps", t:"Venezia", r:"D", x:4, f:3, ti:1},
+  {n:"Kike Perez", t:"Venezia", r:"C", x:4, f:3, ti:1},
+  {n:"Basic", t:"Venezia", r:"C", x:4, f:3, ti:1},
+  {n:"Zortea", t:"Bologna", r:"D", x:7, f:3, ti:1, s:"Terzino offensivo"},
+  {n:"Theate", t:"Bologna", r:"D", x:6, f:3, ti:1},
+  {n:"Ferguson", t:"Bologna", r:"C", x:8, f:3, ti:1},
+  {n:"Moro", t:"Bologna", r:"C", x:5, f:3, ti:1},
+  {n:"Odgaard", t:"Bologna", r:"C", x:9, f:3, ti:1, s:"Fa bonus"},
+  {n:"Cambiaghi", t:"Bologna", r:"C", x:7, f:3, ti:1},
+  {n:"Muric", t:"Sassuolo", r:"P", x:5, f:3, ti:1},
+  {n:"Leysen", t:"Sassuolo", r:"D", x:4, f:3, ti:1},
+  {n:"Doig", t:"Sassuolo", r:"D", x:4, f:3, ti:1},
+  {n:"Matic", t:"Sassuolo", r:"C", x:4, f:3, ti:1},
+  {n:"Bakola", t:"Sassuolo", r:"C", x:4, f:3, ti:1},
+  {n:"Volpato", t:"Sassuolo", r:"C", x:6, f:3, ti:1},
+  {n:"Bowie", t:"Sassuolo", r:"A", x:8, f:3, ti:1},
+  {n:"Locatelli", t:"Juventus", r:"C", x:10, f:3, ti:1, s:"Rigorista alternativo della Juve"},
+  {n:"Douglas Luiz", t:"Juventus", r:"C", x:8, f:3, ti:1},
+  {n:"Conceicao", t:"Juventus", r:"C", x:14, f:2, ti:1, s:"Verifica il ruolo: a volte attaccante"},
+  {n:"Nico Gonzalez", t:"Juventus", r:"C", x:12, f:2, ti:1},
+  {n:"Boga", t:"Juventus", r:"A", x:10, f:3, ti:1},
+  {n:"Musah", t:"Milan", r:"C", x:6, f:3, ti:1},
+  {n:"Bartesaghi", t:"Milan", r:"D", x:6, f:3, ti:1},
+  {n:"Cisse", t:"Milan", r:"A", x:14, f:3, ti:1, s:"Gia 2 gol, sta giocando titolare"},
+  {n:"Deiola", t:"Cagliari", r:"D", x:5, f:3, ti:1, s:"BLOCCO CAGLIARI"},
+  {n:"Romano", t:"Cagliari", r:"C", x:4, f:3, ti:1},
+  {n:"Winks", t:"Cagliari", r:"C", x:5, f:3, ti:1},
+  {n:"Adopo", t:"Cagliari", r:"C", x:4, f:3, ti:1},
+  {n:"Coulibaly", t:"Lecce", r:"C", x:4, f:3, ti:1},
+  {n:"Ngom", t:"Lecce", r:"C", x:3, f:3, ti:1},
+  {n:"Pierotti", t:"Lecce", r:"A", x:8, f:3, ti:1},
+  {n:"Monteiro", t:"Lecce", r:"A", x:6, f:3, ti:1},
+  {n:"Abankwah", t:"Udinese", r:"D", x:4, f:3, ti:1},
+  {n:"Kabasele", t:"Udinese", r:"D", x:5, f:3, ti:1},
+  {n:"Piotrowski", t:"Udinese", r:"C", x:6, f:3, ti:1},
+  {n:"Unai Gomez", t:"Udinese", r:"C", x:6, f:3, ti:1},
+  {n:"Floriani Mussolini", t:"Lazio", r:"D", x:6, f:3, ti:1, s:"BLOCCO LAZIO"},
+  {n:"Belahyane", t:"Lazio", r:"C", x:5, f:3, ti:1},
+  {n:"Taylor", t:"Lazio", r:"C", x:8, f:3, ti:1},
+  {n:"Cancellieri", t:"Lazio", r:"A", x:12, f:3, ti:1, s:"Verifica il ruolo"}
+];
+P.forEach(function(p,i){p.id = p.r + i;});
+
+var KEY = "asta-fanta-2627-v2";
+var state = {st:{}, pr:{}};
+try{ var raw = localStorage.getItem(KEY); if(raw){ var o = JSON.parse(raw); if(o && o.st){ state = {st:o.st||{}, pr:o.pr||{}}; } } }catch(e){}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+
+var ui = {q:"", role:"", pen:false, hide:true, blocco:false, tit:false};
+
+function norm(s){ return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,""); }
+function mine(){ return P.filter(function(p){ return state.st[p.id]==="m"; }); }
+function spent(){ return mine().reduce(function(a,p){ return a + (state.pr[p.id]||0); },0); }
+function spentRole(r){ return mine().filter(function(p){return p.r===r;}).reduce(function(a,p){ return a + (state.pr[p.id]||0); },0); }
+function countRole(r){ return mine().filter(function(p){return p.r===r;}).length; }
+function totalSlots(){ return SLOTS.P+SLOTS.D+SLOTS.C+SLOTS.A; }
+
+function renderConsole(){
+  var left = BUDGET - spent();
+  var filled = mine().length;
+  var open = totalSlots() - filled;
+  document.getElementById("d-left").textContent = left;
+  document.getElementById("d-slots").textContent = open;
+  var maxBid = open > 0 ? Math.max(0, left - (open - 1)) : 0;
+  document.getElementById("d-max").textContent = maxBid;
+
+  var sb = document.getElementById("slots");
+  sb.innerHTML = "";
+  ["P","D","C","A"].forEach(function(r){
+    var c = countRole(r), tot = SLOTS[r];
+    var el = document.createElement("div");
+    el.className = "slot" + (c>=tot ? " full" : "");
+    el.innerHTML = '<span class="rc rc-'+r+'">'+r+'</span>'+
+      '<span class="ct">'+c+'/'+tot+'</span>'+
+      '<span class="bd">'+spentRole(r)+' di '+TARGET[r]+' cr</span>';
+    sb.appendChild(el);
+  });
+
+  document.getElementById("r-count").textContent = filled+"/"+totalSlots();
+  document.getElementById("r-bar").style.width = (spent()/BUDGET*100).toFixed(1)+"%";
+}
+
+function renderRoster(){
+  var box = document.getElementById("roster");
+  box.innerHTML = "";
+  ["P","D","C","A"].forEach(function(r){
+    var list = mine().filter(function(p){return p.r===r;}).sort(function(a,b){return (state.pr[b.id]||0)-(state.pr[a.id]||0);});
+    var g = document.createElement("div");
+    g.className = "rg";
+    var h = '<div class="rg-h"><span>'+ROLE_NAME[r]+' '+list.length+'/'+SLOTS[r]+'</span><span class="sp">'+spentRole(r)+' cr</span></div>';
+    var body = list.length ? list.map(function(p){
+      return '<div class="ri"><span class="rn">'+p.n+(p.p?' &middot;':'')+'</span>'+
+             '<span><span class="rp">'+(state.pr[p.id]||0)+'</span>'+
+             '<button class="rx" data-undo="'+p.id+'" title="Rimuovi" aria-label="Rimuovi '+p.n+'">&times;</button></span></div>';
+    }).join("") : '<div class="none">nessuno</div>';
+    g.innerHTML = h + body;
+    box.appendChild(g);
+  });
+}
+
+function renderList(){
+  var host = document.getElementById("list");
+  host.innerHTML = "";
+  var q = norm(ui.q.trim());
+  var rows = P.filter(function(p){
+    if(ui.role && p.r !== ui.role) return false;
+    if(ui.pen && !p.p) return false;
+    if(ui.tit && !p.ti) return false;
+    if(ui.blocco && !((p.r==="P"||p.r==="D") && GC[p.t] !== undefined && GC[p.t] <= 3)) return false;
+    if(ui.hide && state.st[p.id]==="o") return false;
+    if(q && norm(p.n).indexOf(q) < 0 && norm(p.t).indexOf(q) < 0) return false;
+    return true;
+  });
+
+  if(!rows.length){
+    host.innerHTML = '<div class="empty">Nessun giocatore trovato. Prova con meno lettere, o togli i filtri.</div>';
+    return;
+  }
+
+  var groups = q ? [{key:"ris", label:"Risultati", desc:"in ordine di prezzo massimo", items:rows.slice().sort(function(a,b){return b.x-a.x;})}]
+                 : [1,2,3,4].map(function(f){
+                     return {key:f, label:TIER_NAME[f][0], desc:TIER_NAME[f][1],
+                             items:rows.filter(function(p){return p.f===f;}).sort(function(a,b){return b.x-a.x;})};
+                   }).filter(function(g){return g.items.length;});
+
+  groups.forEach(function(g){
+    var h = document.createElement("div");
+    h.className = "tier-head";
+    h.innerHTML = '<span class="n">'+g.label+'</span><span class="d">'+g.desc+'</span><span class="cnt">'+g.items.length+'</span>';
+    host.appendChild(h);
+    var box = document.createElement("div");
+    box.className = "rows";
+    g.items.forEach(function(p){ box.appendChild(rowEl(p)); });
+    host.appendChild(box);
+  });
+}
+
+function rowEl(p){
+  var st = state.st[p.id];
+  var el = document.createElement("div");
+  el.className = "row" + (st==="o" ? " gone" : "") + (st==="m" ? " mine" : "");
+  var tags = "";
+  if(p.r==="P" || p.r==="D"){
+    var g = GC[p.t];
+    if(g !== undefined){
+      var cls = g<=2 ? "def-good" : (g<=3 ? "def-ok" : (g<=5 ? "def-mid" : "def-bad"));
+      tags += '<span class="tag '+cls+'" title="Gol subiti dalla squadra in 3 giornate">'+g+' gol subiti</span>';
+    }
+  }
+  if(p.ti) tags += '<span class="tag ti">titolare</span>';
+  if(p.p) tags += '<span class="tag pen">rigorista</span>';
+  if(p.w) tags += '<span class="tag warn">'+p.w+'</span>';
+  if(p.a) tags += '<span class="tag avoid">'+p.a+'</span>';
+  var acts = st==="m"
+    ? '<span class="paid">'+(state.pr[p.id]||0)+' cr</span><button class="mini" data-undo="'+p.id+'" title="Annulla" aria-label="Annulla acquisto">&#8631;</button>'
+    : (st==="o"
+      ? '<button class="mini" data-undo="'+p.id+'" title="Rimetti in lista" aria-label="Rimetti in lista">&#8631;</button>'
+      : '<button class="mini take" data-buy="'+p.id+'" title="L\'ho preso io" aria-label="Ho preso '+p.n+'">&check;</button>'+
+        '<button class="mini out" data-out="'+p.id+'" title="Preso da un altro" aria-label="Preso da un altro">&times;</button>');
+  el.innerHTML =
+    '<span class="rc rc-'+p.r+'">'+p.r+'</span>'+
+    '<span class="who"><span class="nm">'+p.n+'</span>'+
+      '<span class="meta"><span class="team">'+p.t+'</span>'+tags+'</span>'+
+      (p.s ? '<span class="note">'+p.s+'</span>' : '')+
+    '</span>'+
+    '<span class="price"><span class="pv">'+p.x+'</span><span class="pk">max</span></span>'+
+    '<span class="acts">'+acts+'</span>';
+  return el;
+}
+
+function render(){ renderConsole(); renderRoster(); renderList(); }
+
+document.addEventListener("click", function(e){
+  var b = e.target.closest("button");
+  if(!b) return;
+  var id;
+  if((id = b.getAttribute("data-buy"))){
+    var p = P.filter(function(x){return x.id===id;})[0];
+    if(countRole(p.r) >= SLOTS[p.r]){
+      alert("Hai già " + SLOTS[p.r] + " " + ROLE_NAME[p.r].toLowerCase() + ". Liberane uno prima.");
+      return;
+    }
+    var v = prompt("A quanto hai preso " + p.n + "?\n(prezzo massimo consigliato: " + p.x + " crediti)", p.x);
+    if(v === null) return;
+    var n = parseInt(v, 10);
+    if(isNaN(n) || n < 0){ alert("Inserisci un numero di crediti."); return; }
+    state.st[id] = "m"; state.pr[id] = n; save(); render(); return;
+  }
+  if((id = b.getAttribute("data-out"))){ state.st[id] = "o"; delete state.pr[id]; save(); render(); return; }
+  if((id = b.getAttribute("data-undo"))){ delete state.st[id]; delete state.pr[id]; save(); render(); return; }
+});
+
+document.getElementById("q").addEventListener("input", function(e){ ui.q = e.target.value; renderList(); });
+document.getElementById("f-tit").addEventListener("click", function(e){
+  ui.tit = !ui.tit; e.currentTarget.classList.toggle("on", ui.tit);
+  e.currentTarget.setAttribute("aria-pressed", String(ui.tit)); renderList();
+});
+document.getElementById("f-blocco").addEventListener("click", function(e){
+  ui.blocco = !ui.blocco; e.currentTarget.classList.toggle("on", ui.blocco);
+  e.currentTarget.setAttribute("aria-pressed", String(ui.blocco)); renderList();
+});
+document.getElementById("f-pen").addEventListener("click", function(e){
+  ui.pen = !ui.pen; e.currentTarget.classList.toggle("on", ui.pen);
+  e.currentTarget.setAttribute("aria-pressed", String(ui.pen)); renderList();
+});
+document.getElementById("f-hide").addEventListener("click", function(e){
+  ui.hide = !ui.hide; e.currentTarget.classList.toggle("on", ui.hide);
+  e.currentTarget.setAttribute("aria-pressed", String(ui.hide)); renderList();
+});
+document.getElementById("reset").addEventListener("click", function(){
+  if(confirm("Azzeri rosa e giocatori segnati come presi?")){ state = {st:{}, pr:{}}; save(); render(); }
+});
+
+var rb = document.getElementById("rolebar");
+[["","Tutti"],["P","Portieri"],["D","Difensori"],["C","Centrocampisti"],["A","Attaccanti"]].forEach(function(o){
+  var b = document.createElement("button");
+  b.className = "btn" + (o[0]===ui.role ? " on" : "");
+  b.textContent = o[1];
+  b.setAttribute("aria-pressed", String(o[0]===ui.role));
+  b.addEventListener("click", function(){
+    ui.role = o[0];
+    Array.prototype.forEach.call(rb.children, function(c){ c.classList.remove("on"); c.setAttribute("aria-pressed","false"); });
+    b.classList.add("on"); b.setAttribute("aria-pressed","true");
+    renderList();
+  });
+  rb.appendChild(b);
+});
+
+render();
+</script>
