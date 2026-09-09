@@ -86,7 +86,10 @@ body{
   margin:0 -16px;padding:14px 16px 12px;
 }
 .console-in{max-width:1180px;margin:0 auto}
-.masthead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.masthead{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.masthead .crest{width:46px;height:55px;flex:none;display:block}
+.mh-txt{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;min-width:0}
+@media (max-width:480px){.masthead .crest{width:36px;height:43px}}
 .masthead h1{
   font-family:"Archivo Narrow",sans-serif;font-weight:700;
   font-size:23px;letter-spacing:-.01em;margin:0;text-wrap:balance;
@@ -117,6 +120,8 @@ body{
 .slot .ct{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-weight:600}
 .slot .bd{color:var(--ink-faint);font-size:11.5px;font-family:"IBM Plex Mono",monospace}
 .slot.full{opacity:.5}
+.slot.over{border-color:var(--rosso)}
+.slot.over .bd{color:var(--rosso);font-weight:600}
 
 .rc-P{background:var(--ocra-wash);color:var(--ocra)}
 .rc-D{background:var(--azzurro-wash);color:var(--azzurro)}
@@ -244,8 +249,58 @@ body{
 <div class="console">
   <div class="console-in">
     <div class="masthead">
-      <h1>Tabellone d'asta</h1>
-      <span class="sub">10 squadre &middot; 500 crediti &middot; rosa 25 &middot; <b>modificatore di difesa attivo</b></span>
+      <svg class="crest" viewBox="0 0 200 240" aria-hidden="true">
+      <defs>
+          <linearGradient id="lgCampo" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#92302B"/>
+            <stop offset="1" stop-color="#631D19"/>
+          </linearGradient>
+        </defs>
+        <!-- scudo -->
+        <path d="M100 6 L186 30 V132 C186 180 148 214 100 234 C52 214 14 180 14 132 V30 Z" fill="#2E5C38"/>
+        <path d="M100 13 L179 35 V131 C179 176 144 208 100 226 C56 208 21 176 21 131 V35 Z" fill="#F2EDE4"/>
+        <path d="M100 19 L173 39 V130 C173 172 141 202 100 219 C59 202 27 172 27 130 V39 Z" fill="url(#lgCampo)"/>
+        <!-- ===== LUPO ===== -->
+        <g transform="matrix(.84 0 0 .84 16 .8)">
+          <!-- silhouette: orecchie, tufti di pelo, muso -->
+          <path d="M100 48
+                   L132 60 L154 30 L150 74 L152 90 L148 102 L156 114 L140 118
+                   L146 134 L124 134 L114 148 L106 157 L100 163
+                   L94 157 L86 148 L76 134 L54 134 L60 118 L44 114 L52 102
+                   L48 90 L50 74 L46 30 L68 60 Z" fill="#F2EDE4"/>
+          <!-- interno orecchie -->
+          <path d="M138 62 L149 40 L148 70 Z" fill="#7E2622"/>
+          <path d="M62 62 L51 40 L52 70 Z" fill="#7E2622"/>
+          <!-- occhi -->
+          <path d="M113 103 L137 91 L141 100 L119 110 Z" fill="#24492C"/>
+          <path d="M87 103 L63 91 L59 100 L81 110 Z" fill="#24492C"/>
+          <path d="M122 102 L134 96 L135.5 99.5 L123 105 Z" fill="#7FB891"/>
+          <path d="M78 102 L66 96 L64.5 99.5 L77 105 Z" fill="#7FB891"/>
+          <!-- muso -->
+          <path d="M100 110 L86 137 L92 154 L100 163 L108 154 L114 137 Z" fill="#FFFCF6"/>
+          <path d="M100 110 L86 137 L92 154 L100 163 Z" fill="#F7F1E5"/>
+          <!-- tartufo e bocca -->
+          <path d="M100 128 C104 132 108 137 109 140 C106 144 103 147 100 148 C97 147 94 144 91 140 C92 137 96 132 100 128 Z" fill="#3B0D0A"/>
+          <path d="M100 148 V152" stroke="#3B0D0A" stroke-width="2" stroke-linecap="round"/>
+        </g>
+        <!-- ===== CARTIGLIO ===== -->
+        <path d="M34 150 H166 L146 186 H54 Z" fill="#2E5C38"/>
+        <path d="M34 150 H166 L164 155 H36 Z" fill="#F2EDE4" opacity=".4"/>
+        <text x="100" y="170.5" text-anchor="middle"
+              font-family="'Archivo Narrow','Arial Narrow',Haettenschweiler,Impact,sans-serif"
+              font-size="21" font-weight="700" fill="#F2EDE4">raniastar</text>
+        <text x="100" y="183.5" text-anchor="middle"
+              font-family="'Archivo Narrow','Arial Narrow',Haettenschweiler,Impact,sans-serif"
+              font-size="13" font-weight="700" letter-spacing="5" fill="#F2EDE4">team</text>
+        <!-- stagione -->
+        <text x="100" y="202" text-anchor="middle"
+              font-family="'IBM Plex Mono',Consolas,monospace"
+              font-size="9.5" font-weight="700" letter-spacing="1.4" fill="#F2EDE4" opacity=".82">26/27</text>
+      </svg>
+      <div class="mh-txt">
+        <h1>Tabellone d'asta</h1>
+        <span class="sub">10 squadre &middot; 500 crediti &middot; rosa 25 &middot; <b>modificatore di difesa attivo</b></span>
+      </div>
     </div>
     <div class="dials">
       <div class="dial lead"><span class="k">Crediti rimasti</span><span class="v" id="d-left">500</span></div>
@@ -363,17 +418,17 @@ var P = [
   {n:"Comuzzo", t:"Torino", r:"D", x:12, f:2, s:"Miglior rapporto qualita/prezzo del listone.", ti:1},
   {n:"Miranda", t:"Bologna", r:"D", x:12, f:2, ti:1},
   {n:"Lucumi", t:"Juventus", r:"D", x:12, f:2, s:"Completa il blocco Juve.", ti:1},
-  {n:"Mina", t:"Cagliari", r:"D", x:12, f:2, p:1, s:"Difensore E rigorista, in una difesa da 1 gol subito: combinazione rarissima."},
+  {n:"Mina", t:"Cagliari", r:"D", x:10, f:2, p:1, w:"Non titolare", s:"Difensore E rigorista, ma NON e nell'undici attuale: al centro giocano Ze Pedro, Rodriguez e Deiola. Compralo solo a prezzo basso."},
   {n:"Spinazzola", t:"Napoli", r:"D", x:12, f:2, ti:1},
   {n:"Zappacosta", t:"Atalanta", r:"D", x:11, f:2, ti:1},
-  {n:"Bellanova", t:"Atalanta", r:"D", x:11, f:2},
+  {n:"Bellanova", t:"Atalanta", r:"D", x:11, f:2, ti:1},
   {n:"Celik", t:"Juventus", r:"D", x:10, f:2, ti:1},
   {n:"Kossounou", t:"Atalanta", r:"D", x:10, f:2, ti:1},
-  {n:"Kristensen", t:"Atalanta", r:"D", x:10, f:2},
+  {n:"Kristensen", t:"Atalanta", r:"D", x:10, f:2, ti:1},
   {n:"Chalobah", t:"Como", r:"D", x:10, f:2, ti:1},
   {n:"De Winter", t:"Milan", r:"D", x:10, f:2, ti:1},
-  {n:"Doekhi", t:"Lazio", r:"D", x:9, f:3, s:"BLOCCO LAZIO: 1 gol subito come la Roma, a un quinto del prezzo. Segna anche di testa.", ti:1},
-  {n:"Marusic", t:"Lazio", r:"D", x:9, f:3, s:"BLOCCO LAZIO."},
+  {n:"Doekhi", t:"Lazio", r:"D", x:9, f:3, s:"BLOCCO LAZIO: 1 gol subito come la Roma, a meno di meta prezzo (38 cr il blocco Lazio, 99 quello Roma). Segna anche di testa.", ti:1},
+  {n:"Marusic", t:"Lazio", r:"D", x:3, f:3, w:"Non titolare", s:"Fuori dall'undici: al suo posto gioca Floriani Mussolini. Non e lui il quarto del blocco Lazio."},
   {n:"Nuno Tavares", t:"Lazio", r:"D", x:8, f:3, s:"BLOCCO LAZIO, terzino offensivo.", ti:1},
   {n:"Provstgaard", t:"Lazio", r:"D", x:7, f:3, s:"BLOCCO LAZIO a prezzo minimo.", ti:1},
   {n:"Heggem", t:"Bologna", r:"D", x:8, f:3, ti:1},
@@ -409,7 +464,7 @@ var P = [
   {n:"Barella", t:"Inter", r:"C", x:36, f:1, s:"Sempre in campo, voti alti.", ti:1},
   {n:"McTominay", t:"Napoli", r:"C", x:36, f:1, w:"Rientra a ottobre", s:"OCCASIONE: fuori per un'operazione, rientra a inizio ottobre. Vale 60+. Perdi 3-4 giornate su 38."},
   {n:"Orsolini", t:"Bologna", r:"C", x:36, f:1, p:1, w:"Infortunato", s:"OCCASIONE: rigorista del Bologna, ora infortunato. Stessa logica di McTominay."},
-  {n:"De Bruyne", t:"Napoli", r:"C", x:32, f:2, p:1, s:"Rigorista del Napoli, assist a raffica. Occhio a eta e rotazioni."},
+  {n:"De Bruyne", t:"Napoli", r:"C", x:32, f:2, p:1, w:"Rotazioni", s:"Rigorista del Napoli, assist a raffica. Occhio a eta e rotazioni."},
   {n:"Frattesi", t:"Lazio", r:"C", x:28, f:2, s:"Gia 3 gol in 3 giornate, titolare inamovibile.", ti:1},
   {n:"Zaccagni", t:"Lazio", r:"C", x:28, f:2, p:1, ti:1},
   {n:"Baturina", t:"Como", r:"C", x:26, f:2, s:"Gia 2 gol, in grande forma.", ti:1},
@@ -432,9 +487,9 @@ var P = [
   {n:"Calo", t:"Frosinone", r:"C", x:10, f:3, p:1, s:"Un rigorista a 10 crediti: affare puro.", ti:1},
   {n:"Busio", t:"Venezia", r:"C", x:10, f:3, p:1, ti:1},
   {n:"Pedro Goncalves", t:"Fiorentina", r:"C", x:10, f:3, ti:1},
-  {n:"Saelemaekers", t:"Milan", r:"C", x:9, f:3},
+  {n:"Saelemaekers", t:"Milan", r:"C", x:9, f:3, ti:1},
   {n:"Pessina", t:"Monza", r:"C", x:8, f:3, p:1, w:"Infortunato", s:"Rigorista del Monza, ma parte in infermeria."},
-  {n:"Fagioli", t:"Juventus", r:"C", x:8, f:3},
+  {n:"Fagioli", t:"Juventus", r:"C", x:8, f:3, ti:1},
   {n:"Ekkelenkamp", t:"Udinese", r:"C", x:8, f:3, s:"Titolare, segna.", ti:1},
   {n:"Baldanzi", t:"Genoa", r:"C", x:8, f:3, ti:1},
   {n:"Chukwueze", t:"Milan", r:"C", x:8, f:3, ti:1},
@@ -444,7 +499,7 @@ var P = [
   {n:"Kamara", t:"Udinese", r:"C", x:7, f:3, s:"Gia 2 gol.", ti:1},
   {n:"Adzic", t:"Sassuolo", r:"C", x:6, f:3, ti:1},
   {n:"Schmid", t:"Frosinone", r:"C", x:6, f:3, ti:1},
-  {n:"Milla", t:"Como", r:"C", x:5, f:3},
+  {n:"Milla", t:"Como", r:"C", x:5, f:3, ti:1},
   {n:"Ndour", t:"Fiorentina", r:"C", x:5, f:3, ti:1},
   {n:"Cacciamani", t:"Torino", r:"C", x:4, f:3, ti:1},
   {n:"Keita", t:"Parma", r:"C", x:4, f:3, ti:1},
@@ -462,13 +517,13 @@ var P = [
   {n:"Dybala", t:"Roma", r:"A", x:52, f:2, s:"Qualita pura, se sta bene.", ti:1},
   {n:"Scamacca", t:"Atalanta", r:"A", x:52, f:2, p:1, ti:1},
   {n:"Douvikas", t:"Como", r:"A", x:48, f:2, s:"Gia 2 gol, titolare del Como.", ti:1},
-  {n:"Dovbyk", t:"Bologna", r:"A", x:45, f:2, s:"IL MIGLIORE QUI: ottimo rapporto qualita/prezzo, rilancio dopo la Roma."},
+  {n:"Dovbyk", t:"Bologna", r:"A", x:45, f:2, ti:1, s:"IL MIGLIORE QUI: ottimo rapporto qualita/prezzo, rilancio dopo la Roma."},
   {n:"Kean", t:"Como", r:"A", x:45, f:2, w:"Titolarita", s:"Arrivato il 1 settembre: ballottaggio con Douvikas. Grande talento, posto non garantito."},
   {n:"Davis", t:"Udinese", r:"A", x:40, f:2, p:1, s:"Rigorista dell'Udinese, titolare fisso.", ti:1},
   {n:"P. Esposito", t:"Inter", r:"A", x:40, f:2, s:"Gioca titolare al posto di Thuram.", ti:1},
   {n:"Berardi", t:"Sassuolo", r:"A", x:35, f:2, p:1, s:"Rigorista del Sassuolo: bonus quasi garantiti a prezzo medio.", ti:1},
   {n:"Simeone", t:"Torino", r:"A", x:35, f:2, ti:1},
-  {n:"Woltemade", t:"Juventus", r:"A", x:35, f:2},
+  {n:"Woltemade", t:"Juventus", r:"A", x:35, f:2, ti:1},
   {n:"De Ketelaere", t:"Atalanta", r:"A", x:35, f:2, ti:1},
   {n:"Beto", t:"Fiorentina", r:"A", x:30, f:2, p:1, ti:1},
   {n:"Pinamonti", t:"Lazio", r:"A", x:28, f:2, ti:1},
@@ -477,7 +532,7 @@ var P = [
   {n:"Yildiz", t:"Juventus", r:"A", x:22, f:2, a:"Fuori a novembre", s:"TRAPPOLA: operato al piede, rientra non prima di fine novembre."},
   {n:"Raimondo", t:"Frosinone", r:"A", x:20, f:3, s:"4 gol in 3 giornate! La sorpresa del campionato, titolare della neopromossa.", ti:1},
   {n:"Piccoli", t:"Bologna", r:"A", x:18, f:3, ti:1},
-  {n:"Vitinha", t:"Genoa", r:"A", x:16, f:3},
+  {n:"Vitinha", t:"Genoa", r:"A", x:16, f:3, ti:1},
   {n:"Stulic", t:"Lecce", r:"A", x:14, f:3, p:1, ti:1},
   {n:"Maldini", t:"Cagliari", r:"A", x:14, f:3, ti:1},
   {n:"Lauriente", t:"Sassuolo", r:"A", x:14, f:3, s:"Titolare, fa bonus.", ti:1},
@@ -489,7 +544,7 @@ var P = [
   {n:"A. Adams", t:"Venezia", r:"A", x:9, f:3, ti:1},
   {n:"Camarda", t:"Milan", r:"A", x:8, f:3},
   {n:"Toure", t:"Parma", r:"A", x:7, f:3, ti:1},
-  {n:"Ghedjemis", t:"Frosinone", r:"A", x:6, f:3},
+  {n:"Ghedjemis", t:"Frosinone", r:"A", x:6, f:3, ti:1},
   {n:"Zapata", t:"Torino", r:"A", x:5, f:3},
   {n:"Nzola", t:"Cagliari", r:"A", x:5, f:3},
   {n:"Bijlow", t:"Genoa", r:"P", x:6, f:3, ti:1},
@@ -619,7 +674,7 @@ function renderConsole(){
   ["P","D","C","A"].forEach(function(r){
     var c = countRole(r), tot = SLOTS[r];
     var el = document.createElement("div");
-    el.className = "slot" + (c>=tot ? " full" : "");
+    el.className = "slot" + (c>=tot ? " full" : "") + (spentRole(r) > TARGET[r] ? " over" : "");
     el.innerHTML = '<span class="rc rc-'+r+'">'+r+'</span>'+
       '<span class="ct">'+c+'/'+tot+'</span>'+
       '<span class="bd">'+spentRole(r)+' di '+TARGET[r]+' cr</span>';
@@ -734,6 +789,10 @@ document.addEventListener("click", function(e){
     if(v === null) return;
     var n = parseInt(v, 10);
     if(isNaN(n) || n < 0){ alert("Inserisci un numero di crediti."); return; }
+    if(n > BUDGET - spent()){ alert("Non hai abbastanza crediti: te ne restano " + (BUDGET - spent()) + "."); return; }
+    var reserve = totalSlots() - mine().length - 1;
+    if(n > BUDGET - spent() - reserve){ if(!confirm("Con " + n + " crediti non ti resta 1 credito per ognuno dei " + reserve + " slot ancora vuoti.\n\nConfermi?")) return; }
+    if(n > p.x){ if(!confirm("Attenzione: " + n + " crediti sono " + (n - p.x) + " sopra il massimo di " + p.n + " (" + p.x + ").\n\nIl MAX e un tetto, non un consiglio. Confermi comunque?")) return; }
     state.st[id] = "m"; state.pr[id] = n; save(); render(); return;
   }
   if((id = b.getAttribute("data-out"))){ state.st[id] = "o"; delete state.pr[id]; save(); render(); return; }
