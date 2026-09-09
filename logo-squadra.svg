@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" width="400" height="480" role="img" aria-labelledby="t d">
+  <title id="t">raniastar team — stemma</title>
+  <desc id="d">Testa di lupo stilizzata color panna su campo bordeaux, bordo e cartiglio verdi, nei colori della maglia.</desc>
+
+  <defs>
+    <linearGradient id="campo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#92302B"/>
+      <stop offset="1" stop-color="#631D19"/>
+    </linearGradient>
+  </defs>
+
+  <!-- scudo -->
+  <path d="M100 6 L186 30 V132 C186 180 148 214 100 234 C52 214 14 180 14 132 V30 Z" fill="#2E5C38"/>
+  <path d="M100 13 L179 35 V131 C179 176 144 208 100 226 C56 208 21 176 21 131 V35 Z" fill="#F2EDE4"/>
+  <path d="M100 19 L173 39 V130 C173 172 141 202 100 219 C59 202 27 172 27 130 V39 Z" fill="url(#campo)"/>
+
+  <!-- ===== LUPO ===== -->
+  <g transform="matrix(.84 0 0 .84 16 .8)">
+    <!-- silhouette: orecchie, tufti di pelo, muso -->
+    <path d="M100 48
+             L132 60 L154 30 L150 74 L152 90 L148 102 L156 114 L140 118
+             L146 134 L124 134 L114 148 L106 157 L100 163
+             L94 157 L86 148 L76 134 L54 134 L60 118 L44 114 L52 102
+             L48 90 L50 74 L46 30 L68 60 Z" fill="#F2EDE4"/>
+
+    <!-- interno orecchie -->
+    <path d="M138 62 L149 40 L148 70 Z" fill="#7E2622"/>
+    <path d="M62 62 L51 40 L52 70 Z" fill="#7E2622"/>
+
+    <!-- occhi -->
+    <path d="M113 103 L137 91 L141 100 L119 110 Z" fill="#24492C"/>
+    <path d="M87 103 L63 91 L59 100 L81 110 Z" fill="#24492C"/>
+    <path d="M122 102 L134 96 L135.5 99.5 L123 105 Z" fill="#7FB891"/>
+    <path d="M78 102 L66 96 L64.5 99.5 L77 105 Z" fill="#7FB891"/>
+
+    <!-- muso -->
+    <path d="M100 110 L86 137 L92 154 L100 163 L108 154 L114 137 Z" fill="#FFFCF6"/>
+    <path d="M100 110 L86 137 L92 154 L100 163 Z" fill="#F7F1E5"/>
+
+    <!-- tartufo e bocca -->
+    <path d="M100 128 C104 132 108 137 109 140 C106 144 103 147 100 148 C97 147 94 144 91 140 C92 137 96 132 100 128 Z" fill="#3B0D0A"/>
+    <path d="M100 148 V152" stroke="#3B0D0A" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- ===== CARTIGLIO ===== -->
+  <path d="M34 150 H166 L146 186 H54 Z" fill="#2E5C38"/>
+  <path d="M34 150 H166 L164 155 H36 Z" fill="#F2EDE4" opacity=".4"/>
+  <text x="100" y="170.5" text-anchor="middle"
+        font-family="'Archivo Narrow','Arial Narrow',Haettenschweiler,Impact,sans-serif"
+        font-size="21" font-weight="700" fill="#F2EDE4">raniastar</text>
+  <text x="100" y="183.5" text-anchor="middle"
+        font-family="'Archivo Narrow','Arial Narrow',Haettenschweiler,Impact,sans-serif"
+        font-size="13" font-weight="700" letter-spacing="5" fill="#F2EDE4">team</text>
+
+  <!-- stagione -->
+  <text x="100" y="202" text-anchor="middle"
+        font-family="'IBM Plex Mono',Consolas,monospace"
+        font-size="9.5" font-weight="700" letter-spacing="1.4" fill="#F2EDE4" opacity=".82">26/27</text>
+</svg>
