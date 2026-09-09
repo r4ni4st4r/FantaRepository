@@ -108,6 +108,12 @@ porta e difesa**.
 | **Attaccanti** | 6 | **~210** | 42% | ~240 |
 | *Margine* | — | *~5* | 1% | |
 
+> **Questi numeri sono tetti, non quote da spendere.** Se la difesa che vuoi
+> costa 91 invece di 115, hai fatto bene: i crediti avanzati vanno all'attacco
+> o restano come margine. **Non alzare mai un'offerta solo per "finire il
+> budget del reparto"**: è il modo più rapido di pagare un difensore il doppio
+> del suo valore.
+
 ### Come si distribuisce dentro ogni reparto
 
 **Pochi giocatori costosi + tanti titolari da pochi crediti.** Sempre.
@@ -134,16 +140,16 @@ Hai 200 crediti e 9 caselle vuote → massimo 192. Ma non farlo mai davvero.
 Questa è la decisione più importante della serata. **Gol subiti dopo 3
 giornate:**
 
-| Squadra | Gol subiti | Blocco (portiere + difensori) | Costo stimato |
+| Squadra | Gol subiti | Blocco (portiere + difensori) | Costo ai MAX |
 |---|---|---|---|
-| **Roma** | **1** | Svilar + Mancini + Ndicka + Hermoso | ~95 |
-| **Lazio** | **1** | Mandas + Doekhi + Provstgaard + Nuno Tavares | ~35 |
-| **Cagliari** | **1** | Caprile + Obert + Zè Pedro + Rodriguez | ~25 |
-| **Juventus** | **1** | Vicario + Bremer + Kalulu + Lucumì | ~80 |
-| **Milan** | 2 | Maignan + Pavlovic + Gila + De Winter | ~85 |
-| **Inter** | 3 | J. Martinez + Bastoni + Akanji + Bisseck | ~85 |
-| Como | 3 | Butez + Ramon + Chalobah + Valle | ~50 |
-| Atalanta | 3 | Carnesecchi + Scalvini + Kossounou + Kristensen | ~60 |
+| **Roma** | **1** | Svilar + Mancini + Ndicka + Hermoso | **99** |
+| **Lazio** | **1** | Mandas + Doekhi + Provstgaard + Nuno Tavares | **38** |
+| **Cagliari** | **1** | Caprile + Obert + Zè Pedro + Rodriguez | **28** |
+| **Juventus** | **1** | Vicario + Bremer + Kalulu + Lucumì | **82** |
+| **Milan** | 2 | Maignan + Pavlovic + Gila + De Winter | **78** |
+| **Inter** | 3 | J. Martinez + Bastoni + Akanji + Bisseck | **85** |
+| Como | 3 | Butez + Ramon + Chalobah + Valle | **43** |
+| Atalanta | 3 | Carnesecchi + Scalvini + Kossounou + Kristensen | **61** |
 | Napoli | 5 | — | — |
 | Genoa / Venezia / Monza | 7-8 | da evitare per il modificatore | — |
 | **Fiorentina** | **9** | **la peggiore: evita De Gea e i suoi difensori** | — |
@@ -152,16 +158,20 @@ giornate:**
 
 **🅰️ BLOCCO PREMIUM — Roma (consigliato se hai i crediti)**
 Svilar è il miglior portiere del campionato e la Roma ha la difesa più solida,
-anche l'anno scorso. Costa caro (~95 crediti per portiere + 3 difensori) ma è
-la scelta più sicura per stare stabilmente sopra il 6,50 di media.
+anche l'anno scorso. Costa caro (**99 crediti** ai prezzi massimi del §5, per
+portiere + 3 difensori) ma è la scelta più sicura per stare stabilmente sopra
+il 6,50 di media.
 
 **🅱️ BLOCCO VALORE — Lazio (la mossa furba)**
 La Lazio ha subito **gli stessi gol della Roma** ma il suo blocco costa
-**~35 crediti invece di 95**. Mandas 12, Doekhi 9, Provstgaard 7, Nuno Tavares 8. (Marusic e fuori dall'undici titolare: al suo posto gioca Floriani Mussolini, 6 crediti.)
-Ti liberi 60 crediti da mettere in attacco.
+**38 crediti invece di 99**: Mandas 14, Doekhi 9, Nuno Tavares 8, Provstgaard 7.
+Ti liberi **61 crediti** da mettere in attacco.
 *Il rischio:* tre giornate sono un campione piccolo, e la Lazio non ha la
 solidità storica della Roma. Ma il rapporto qualità/prezzo è il migliore in
 assoluto.
+
+> ⚠️ **Marusic non è più titolare**: al suo posto gioca **Floriani Mussolini**
+> (6 crediti). Se cerchi il quarto uomo del blocco Lazio, è lui — non Marusic.
 
 **La mia raccomandazione:** parti sul blocco Roma. Se Svilar supera i 40 o i
 difensori della Roma vanno all'asta a più di 25, **passa senza esitare al
@@ -252,7 +262,7 @@ quelli che contano nel modificatore) e 5 riempitivi titolari.
 | Comuzzo | Torino | 12 | ✅ *Miglior rapporto qualità/prezzo del listone* |
 | Miranda | Bologna | 12 | Titolare, qualche bonus |
 | Lucumì | Juventus | 12 | Completa il blocco Juve |
-| **Mina** | Cagliari | 10 | Difensore **e rigorista**, ma ⚠️ **non e nell'undici titolare attuale**: al centro giocano Ze Pedro, Rodriguez e Deiola. Compralo solo a prezzo basso |
+| **Mina** | Cagliari | 10 | Difensore **e rigorista**, ma ⚠️ **non è nell'undici titolare attuale**: al centro giocano Ze Pedro, Rodriguez e Deiola. Compralo solo a prezzo basso |
 | Spinazzola | Napoli | 12 | Titolare |
 | Zappacosta | Atalanta | 11 | Titolare |
 | Bellanova | Atalanta | 11 | Titolare |
@@ -265,7 +275,7 @@ quelli che contano nel modificatore) e 5 riempitivi titolari.
 | Giocatore | Squadra | Max | Note |
 |---|---|---|---|
 | **Doekhi** | Lazio | **9** | ⭐ *Blocco Lazio: 1 gol subito. Segna anche di testa* |
-| **Floriani Mussolini** | Lazio | **6** | ⭐ *Blocco Lazio: e lui il titolare, non Marusic* |
+| **Floriani Mussolini** | Lazio | **6** | ⭐ *Blocco Lazio: è lui il titolare, non Marusic* |
 | Nuno Tavares | Lazio | 8 | Blocco Lazio, terzino offensivo |
 | **Provstgaard** | Lazio | **7** | ⭐ *Blocco Lazio, prezzo minimo* |
 | Heggem | Bologna | 8 | Titolare |
@@ -436,7 +446,7 @@ Pio Esposito. **Non pagarlo da top.**
 | D | **Hermoso** (Roma) | 13 | 🛡️ blocco |
 | D | Comuzzo (Torino) | 11 | |
 | D | Doekhi (Lazio) | 8 | |
-| D | Marusic (Lazio) | 8 | |
+| D | Floriani Mussolini (Lazio) | 6 | |
 | D | Zè Pedro (Cagliari) | 5 | |
 | D | Ziolkowski (Monza) | 2 | |
 | C | **Calhanoglu** (Inter) | 55 | ⚽ rigorista |
@@ -448,15 +458,24 @@ Pio Esposito. **Non pagarlo da top.**
 | C | Cacciamani (Torino) | 4 | |
 | C | Karlstrom (Udinese) | 3 | |
 | A | **Malen** (Roma) | 105 | ⚽ rigorista |
-| A | Dovbyk (Bologna) | 48 | |
+| A | Dovbyk (Bologna) | 45 | |
 | A | Berardi (Sassuolo) | 35 | ⚽ rigorista |
 | A | Raimondo (Frosinone) | 20 | |
 | A | Piccoli (Bologna) | 15 | |
 | A | Zapata (Torino) | 5 | |
-| | **TOTALE** | **476** | |
+| | **TOTALE** | **471** | |
 
-*Restano 24 crediti di margine — servono, perché su qualcuno pagherai più del
+**Per reparto:** portieri 40 · difensori 91 · centrocampisti 115 · attaccanti 225.
+
+*Restano 29 crediti di margine — servono, perché su qualcuno pagherai più del
 previsto.*
+
+> **Perché la difesa costa 91 e non 115?** Perché ai prezzi massimi del §5 il
+> blocco Roma più i cinque titolari low cost costano 91, e non ha senso pagare
+> di più per arrivare a un numero. Fra difesa (−24) e centrocampo (−15)
+> avanzano 39 crediti: **15 vanno in attacco** (225 invece di 210) e **24 nel
+> margine** (29 invece di 5). È l'applicazione della regola del §3: **il budget
+> di reparto è un tetto, non un obiettivo.**
 
 **Rigoristi in rosa: 5** (Malen, Calhanoglu, Berardi, Vlasic, Calò).
 **Blocco modificatore: 4 giocatori della Roma** (Svilar, Mancini, Ndicka,
@@ -464,11 +483,11 @@ Hermoso) + Malen = 5 romanisti su 25. È il limite che accetterei.
 
 ### Variante "blocco valore" — se la Roma costa troppo
 
-Sostituisci Svilar/Mancini/Ndicka/Hermoso (97 crediti) con
-**Mandas + Doekhi + Provstgaard + Nuno Tavares** (~35 crediti) e investi i **62
-crediti risparmiati** su un secondo attaccante forte: al posto di Dovbyk a 48
-prendi **Douvikas a 48 e Davis a 40**, oppure sali su Lautaro come primo
-attaccante.
+Sostituisci Svilar/Mancini/Ndicka/Hermoso (97 crediti ai prezzi di questa
+rosa) con **Mandas + Doekhi + Nuno Tavares + Provstgaard** (38 crediti) e
+investi i **59 crediti risparmiati** su un secondo attaccante forte: al posto
+di Dovbyk a 45 prendi **Douvikas a 48 e Davis a 40**, oppure sali su Lautaro
+come primo attaccante.
 
 ---
 
@@ -493,7 +512,7 @@ attaccante.
 | Sassuolo | **Berardi** | Laurienté |
 | Genoa | **Colombo** | Vitinha, Ostigard |
 | Parma | **Bernabè** | Tourè, Valeri |
-| Cagliari | **Mina** | Kevin Carlos, Maldini |
+| Cagliari | **Mina** ⚠️ *(fuori dall'undici)* | Kevin Carlos, Maldini |
 | Lecce | **Stulić** | Geubbels, Berisha |
 | Monza | **Pessina** | Cutrone |
 | Venezia | **Busio** | Adams, Yeboah |
@@ -547,6 +566,8 @@ riserva dell'Inter da 3 crediti.
 | **Kean** (Como) | Arrivato l'1/9, deve ancora scalzare Douvikas |
 | **Pulisic** (Milan) | Ottimo se gioca, ma reduce da problemi fisici |
 | **Difensori di Genoa, Venezia, Monza** | 7-8 gol subiti: buoni solo come riempitivi da 1-3 crediti, mai come pilastri |
+| **Mina** (Cagliari) | Difensore *e* rigorista, quindi sembra l'affare perfetto: ma al centro giocano Zè Pedro, Rodriguez e Deiola. Max 10, e solo come scommessa |
+| **Marusic** (Lazio) | Sembra il quarto uomo del blocco Lazio: non lo è più, gioca Floriani Mussolini. Non pagarlo come titolare |
 | **Tre portieri veri** | Ne gioca uno. Crediti buttati |
 | **Difensori "che segnano" pagati come pilastri** | Con il modificatore contano i **voti puri**: un gol di un difensore è un extra, non il motivo per comprarlo |
 | **Riserve di squadre grandi** | Un panchinaro dell'Inter vale meno di un titolare del Venezia |
@@ -585,3 +606,6 @@ riserva dell'Inter da 3 crediti.
 
 *Aggiornato il 9 settembre 2026 con modificatore di difesa attivo, lega da 10
 squadre. Dati post-chiusura mercato (1 settembre) e dopo 3 giornate.*
+
+*Prezzi massimi verificati riga per riga contro il [tabellone d'asta](tabellone-asta.html):
+i due file riportano gli stessi MAX per tutti i 158 giocatori in comune.*

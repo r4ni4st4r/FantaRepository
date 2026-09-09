@@ -117,6 +117,8 @@ body{
 .slot .ct{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-weight:600}
 .slot .bd{color:var(--ink-faint);font-size:11.5px;font-family:"IBM Plex Mono",monospace}
 .slot.full{opacity:.5}
+.slot.over{border-color:var(--rosso)}
+.slot.over .bd{color:var(--rosso);font-weight:600}
 
 .rc-P{background:var(--ocra-wash);color:var(--ocra)}
 .rc-D{background:var(--azzurro-wash);color:var(--azzurro)}
@@ -363,17 +365,17 @@ var P = [
   {n:"Comuzzo", t:"Torino", r:"D", x:12, f:2, s:"Miglior rapporto qualita/prezzo del listone.", ti:1},
   {n:"Miranda", t:"Bologna", r:"D", x:12, f:2, ti:1},
   {n:"Lucumi", t:"Juventus", r:"D", x:12, f:2, s:"Completa il blocco Juve.", ti:1},
-  {n:"Mina", t:"Cagliari", r:"D", x:12, f:2, p:1, s:"Difensore E rigorista, in una difesa da 1 gol subito: combinazione rarissima."},
+  {n:"Mina", t:"Cagliari", r:"D", x:10, f:2, p:1, w:"Non titolare", s:"Difensore E rigorista, ma NON e nell'undici attuale: al centro giocano Ze Pedro, Rodriguez e Deiola. Compralo solo a prezzo basso."},
   {n:"Spinazzola", t:"Napoli", r:"D", x:12, f:2, ti:1},
   {n:"Zappacosta", t:"Atalanta", r:"D", x:11, f:2, ti:1},
-  {n:"Bellanova", t:"Atalanta", r:"D", x:11, f:2},
+  {n:"Bellanova", t:"Atalanta", r:"D", x:11, f:2, ti:1},
   {n:"Celik", t:"Juventus", r:"D", x:10, f:2, ti:1},
   {n:"Kossounou", t:"Atalanta", r:"D", x:10, f:2, ti:1},
-  {n:"Kristensen", t:"Atalanta", r:"D", x:10, f:2},
+  {n:"Kristensen", t:"Atalanta", r:"D", x:10, f:2, ti:1},
   {n:"Chalobah", t:"Como", r:"D", x:10, f:2, ti:1},
   {n:"De Winter", t:"Milan", r:"D", x:10, f:2, ti:1},
-  {n:"Doekhi", t:"Lazio", r:"D", x:9, f:3, s:"BLOCCO LAZIO: 1 gol subito come la Roma, a un quinto del prezzo. Segna anche di testa.", ti:1},
-  {n:"Marusic", t:"Lazio", r:"D", x:9, f:3, s:"BLOCCO LAZIO."},
+  {n:"Doekhi", t:"Lazio", r:"D", x:9, f:3, s:"BLOCCO LAZIO: 1 gol subito come la Roma, a meno di meta prezzo (38 cr il blocco Lazio, 99 quello Roma). Segna anche di testa.", ti:1},
+  {n:"Marusic", t:"Lazio", r:"D", x:3, f:3, w:"Non titolare", s:"Fuori dall'undici: al suo posto gioca Floriani Mussolini. Non e lui il quarto del blocco Lazio."},
   {n:"Nuno Tavares", t:"Lazio", r:"D", x:8, f:3, s:"BLOCCO LAZIO, terzino offensivo.", ti:1},
   {n:"Provstgaard", t:"Lazio", r:"D", x:7, f:3, s:"BLOCCO LAZIO a prezzo minimo.", ti:1},
   {n:"Heggem", t:"Bologna", r:"D", x:8, f:3, ti:1},
@@ -409,7 +411,7 @@ var P = [
   {n:"Barella", t:"Inter", r:"C", x:36, f:1, s:"Sempre in campo, voti alti.", ti:1},
   {n:"McTominay", t:"Napoli", r:"C", x:36, f:1, w:"Rientra a ottobre", s:"OCCASIONE: fuori per un'operazione, rientra a inizio ottobre. Vale 60+. Perdi 3-4 giornate su 38."},
   {n:"Orsolini", t:"Bologna", r:"C", x:36, f:1, p:1, w:"Infortunato", s:"OCCASIONE: rigorista del Bologna, ora infortunato. Stessa logica di McTominay."},
-  {n:"De Bruyne", t:"Napoli", r:"C", x:32, f:2, p:1, s:"Rigorista del Napoli, assist a raffica. Occhio a eta e rotazioni."},
+  {n:"De Bruyne", t:"Napoli", r:"C", x:32, f:2, p:1, w:"Rotazioni", s:"Rigorista del Napoli, assist a raffica. Occhio a eta e rotazioni."},
   {n:"Frattesi", t:"Lazio", r:"C", x:28, f:2, s:"Gia 3 gol in 3 giornate, titolare inamovibile.", ti:1},
   {n:"Zaccagni", t:"Lazio", r:"C", x:28, f:2, p:1, ti:1},
   {n:"Baturina", t:"Como", r:"C", x:26, f:2, s:"Gia 2 gol, in grande forma.", ti:1},
@@ -432,9 +434,9 @@ var P = [
   {n:"Calo", t:"Frosinone", r:"C", x:10, f:3, p:1, s:"Un rigorista a 10 crediti: affare puro.", ti:1},
   {n:"Busio", t:"Venezia", r:"C", x:10, f:3, p:1, ti:1},
   {n:"Pedro Goncalves", t:"Fiorentina", r:"C", x:10, f:3, ti:1},
-  {n:"Saelemaekers", t:"Milan", r:"C", x:9, f:3},
+  {n:"Saelemaekers", t:"Milan", r:"C", x:9, f:3, ti:1},
   {n:"Pessina", t:"Monza", r:"C", x:8, f:3, p:1, w:"Infortunato", s:"Rigorista del Monza, ma parte in infermeria."},
-  {n:"Fagioli", t:"Juventus", r:"C", x:8, f:3},
+  {n:"Fagioli", t:"Juventus", r:"C", x:8, f:3, ti:1},
   {n:"Ekkelenkamp", t:"Udinese", r:"C", x:8, f:3, s:"Titolare, segna.", ti:1},
   {n:"Baldanzi", t:"Genoa", r:"C", x:8, f:3, ti:1},
   {n:"Chukwueze", t:"Milan", r:"C", x:8, f:3, ti:1},
@@ -444,7 +446,7 @@ var P = [
   {n:"Kamara", t:"Udinese", r:"C", x:7, f:3, s:"Gia 2 gol.", ti:1},
   {n:"Adzic", t:"Sassuolo", r:"C", x:6, f:3, ti:1},
   {n:"Schmid", t:"Frosinone", r:"C", x:6, f:3, ti:1},
-  {n:"Milla", t:"Como", r:"C", x:5, f:3},
+  {n:"Milla", t:"Como", r:"C", x:5, f:3, ti:1},
   {n:"Ndour", t:"Fiorentina", r:"C", x:5, f:3, ti:1},
   {n:"Cacciamani", t:"Torino", r:"C", x:4, f:3, ti:1},
   {n:"Keita", t:"Parma", r:"C", x:4, f:3, ti:1},
@@ -462,13 +464,13 @@ var P = [
   {n:"Dybala", t:"Roma", r:"A", x:52, f:2, s:"Qualita pura, se sta bene.", ti:1},
   {n:"Scamacca", t:"Atalanta", r:"A", x:52, f:2, p:1, ti:1},
   {n:"Douvikas", t:"Como", r:"A", x:48, f:2, s:"Gia 2 gol, titolare del Como.", ti:1},
-  {n:"Dovbyk", t:"Bologna", r:"A", x:45, f:2, s:"IL MIGLIORE QUI: ottimo rapporto qualita/prezzo, rilancio dopo la Roma."},
+  {n:"Dovbyk", t:"Bologna", r:"A", x:45, f:2, ti:1, s:"IL MIGLIORE QUI: ottimo rapporto qualita/prezzo, rilancio dopo la Roma."},
   {n:"Kean", t:"Como", r:"A", x:45, f:2, w:"Titolarita", s:"Arrivato il 1 settembre: ballottaggio con Douvikas. Grande talento, posto non garantito."},
   {n:"Davis", t:"Udinese", r:"A", x:40, f:2, p:1, s:"Rigorista dell'Udinese, titolare fisso.", ti:1},
   {n:"P. Esposito", t:"Inter", r:"A", x:40, f:2, s:"Gioca titolare al posto di Thuram.", ti:1},
   {n:"Berardi", t:"Sassuolo", r:"A", x:35, f:2, p:1, s:"Rigorista del Sassuolo: bonus quasi garantiti a prezzo medio.", ti:1},
   {n:"Simeone", t:"Torino", r:"A", x:35, f:2, ti:1},
-  {n:"Woltemade", t:"Juventus", r:"A", x:35, f:2},
+  {n:"Woltemade", t:"Juventus", r:"A", x:35, f:2, ti:1},
   {n:"De Ketelaere", t:"Atalanta", r:"A", x:35, f:2, ti:1},
   {n:"Beto", t:"Fiorentina", r:"A", x:30, f:2, p:1, ti:1},
   {n:"Pinamonti", t:"Lazio", r:"A", x:28, f:2, ti:1},
@@ -477,7 +479,7 @@ var P = [
   {n:"Yildiz", t:"Juventus", r:"A", x:22, f:2, a:"Fuori a novembre", s:"TRAPPOLA: operato al piede, rientra non prima di fine novembre."},
   {n:"Raimondo", t:"Frosinone", r:"A", x:20, f:3, s:"4 gol in 3 giornate! La sorpresa del campionato, titolare della neopromossa.", ti:1},
   {n:"Piccoli", t:"Bologna", r:"A", x:18, f:3, ti:1},
-  {n:"Vitinha", t:"Genoa", r:"A", x:16, f:3},
+  {n:"Vitinha", t:"Genoa", r:"A", x:16, f:3, ti:1},
   {n:"Stulic", t:"Lecce", r:"A", x:14, f:3, p:1, ti:1},
   {n:"Maldini", t:"Cagliari", r:"A", x:14, f:3, ti:1},
   {n:"Lauriente", t:"Sassuolo", r:"A", x:14, f:3, s:"Titolare, fa bonus.", ti:1},
@@ -489,7 +491,7 @@ var P = [
   {n:"A. Adams", t:"Venezia", r:"A", x:9, f:3, ti:1},
   {n:"Camarda", t:"Milan", r:"A", x:8, f:3},
   {n:"Toure", t:"Parma", r:"A", x:7, f:3, ti:1},
-  {n:"Ghedjemis", t:"Frosinone", r:"A", x:6, f:3},
+  {n:"Ghedjemis", t:"Frosinone", r:"A", x:6, f:3, ti:1},
   {n:"Zapata", t:"Torino", r:"A", x:5, f:3},
   {n:"Nzola", t:"Cagliari", r:"A", x:5, f:3},
   {n:"Bijlow", t:"Genoa", r:"P", x:6, f:3, ti:1},
@@ -619,7 +621,7 @@ function renderConsole(){
   ["P","D","C","A"].forEach(function(r){
     var c = countRole(r), tot = SLOTS[r];
     var el = document.createElement("div");
-    el.className = "slot" + (c>=tot ? " full" : "");
+    el.className = "slot" + (c>=tot ? " full" : "") + (spentRole(r) > TARGET[r] ? " over" : "");
     el.innerHTML = '<span class="rc rc-'+r+'">'+r+'</span>'+
       '<span class="ct">'+c+'/'+tot+'</span>'+
       '<span class="bd">'+spentRole(r)+' di '+TARGET[r]+' cr</span>';
@@ -734,6 +736,10 @@ document.addEventListener("click", function(e){
     if(v === null) return;
     var n = parseInt(v, 10);
     if(isNaN(n) || n < 0){ alert("Inserisci un numero di crediti."); return; }
+    if(n > BUDGET - spent()){ alert("Non hai abbastanza crediti: te ne restano " + (BUDGET - spent()) + "."); return; }
+    var reserve = totalSlots() - mine().length - 1;
+    if(n > BUDGET - spent() - reserve){ if(!confirm("Con " + n + " crediti non ti resta 1 credito per ognuno dei " + reserve + " slot ancora vuoti.\n\nConfermi?")) return; }
+    if(n > p.x){ if(!confirm("Attenzione: " + n + " crediti sono " + (n - p.x) + " sopra il massimo di " + p.n + " (" + p.x + ").\n\nIl MAX e un tetto, non un consiglio. Confermi comunque?")) return; }
     state.st[id] = "m"; state.pr[id] = n; save(); render(); return;
   }
   if((id = b.getAttribute("data-out"))){ state.st[id] = "o"; delete state.pr[id]; save(); render(); return; }
